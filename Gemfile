@@ -44,6 +44,8 @@ gem "bootsnap", require: false
 
 gem 'slim-rails'
 
+gem 'devise'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -75,4 +77,5 @@ group :test do
   gem "webdrivers"
   gem 'shoulda-matchers', '~> 5.0'
   gem 'rails-controller-testing'
+  gem 'launchy'
 end
