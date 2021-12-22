@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title= 'QNA'
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+
+
+  body
+    = render 'shared/main_nav'
+    p.notice= notice
+    p.alert= alert
+    = yield
+
