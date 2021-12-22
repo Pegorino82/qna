@@ -14,7 +14,7 @@ RSpec.describe AnswersController, type: :controller do
                  question_id: question,
                  answer: attributes_for(:answer, question: question)
                }
-        end.to change(Answer, :count).by(1)
+        end.to change(question.answers, :count).by(1)
       end
 
       it 'redirects to question view' do
