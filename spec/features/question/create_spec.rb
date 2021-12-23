@@ -14,7 +14,7 @@ feature 'User can create question', "
       sign_in(user)
 
       visit questions_path
-      click_on 'Ask question'
+      click_on I18n.t('questions.index.ask')
     end
 
     scenario 'tries to create question' do

@@ -10,6 +10,11 @@ en:
         other: '%{count} errors found'
 
   questions:
+    index:
+      header: 'Questions'
+      ask: 'Ask question'
+      title: 'Title'
+      body: 'Body'
     new:
       ask: 'Ask'
     create:
