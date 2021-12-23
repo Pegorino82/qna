@@ -2,3 +2,15 @@ en:
   main_nav:
     sign_in: 'Sign in'
     sign_out: 'Sign out'
+
+  shared:
+    errors:
+      header:
+        one: '%{count} error found'
+        other: '%{count} errors found'
+
+  questions:
+    new:
+      ask: 'Ask'
+    create:
+      success: 'Your question successfully created.'
