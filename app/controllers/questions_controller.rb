@@ -8,7 +8,9 @@ class QuestionsController < ApplicationController
     @questions = Question.all
   end
 
-  def show; end
+  def show
+    @answer = @question.answers.build
+  end
 
   def new
     @question = Question.new
