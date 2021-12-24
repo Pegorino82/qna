@@ -20,14 +20,12 @@ feature 'Authenticated user can delete his question', "
     expect(page).to_not have_content question.title
   end
 
-  scenario 'Authenticated user can delete others question' do
+  scenario 'Authenticated user can not delete others question' do
     other_user = create :user
     others_question = create :question, author: other_user
 
     visit question_path(others_question)
 
-    click_on I18n.t('questions.show.delete')
-
-    expect(page).to have_content I18n.t('questions.destroy.errors.other')
+    expect(page).to_not have_content I18n.t('questions.show.delete')
   end
 end
