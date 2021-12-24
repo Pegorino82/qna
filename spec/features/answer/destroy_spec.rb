@@ -13,26 +13,24 @@ feature 'Authenticated user can delete his answer', "
 
   scenario 'Authenticated user can delete his question' do
     question = create :question, author: user
-    answers = create_list :answer, 2, question: question, author: user
+    answer = create :answer, question: question, author: user
 
     visit question_path(question)
 
-    find("[data-answer-id='#{answers.last.id}']").click
+    click_on I18n.t('questions.show.delete_answer')
 
     expect(page).to have_content I18n.t('answers.destroy.success')
     expect(page).to have_content I18n.t('questions.show.answers')
-    expect(page.all('li').count).to eq 1
+    expect(page).to_not have_content answer.body
   end
 
   scenario 'Authenticated user can delete others question' do
     other_user = create :user
     others_question = create :question, author: other_user
-    other_answers = create_list :answer, 2, question: others_question, author: other_user
+    create :answer, question: others_question, author: other_user
 
     visit question_path(others_question)
 
-    find("[data-answer-id='#{other_answers.last.id}']").click
-
-    expect(page).to have_content I18n.t('answers.destroy.error.other')
+    expect(page).to_not have_content I18n.t('questions.show.delete_answer')
   end
 end
