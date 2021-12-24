@@ -8,8 +8,8 @@ feature 'User can view question and it answers', "
   I'd like to be able to see the question and it answers
 " do
   given(:user) { create :user }
-  given(:question) { create :question, author_id: user.id }
-  given!(:answers) { create_list :answer, 3, question: question }
+  given(:question) { create :question, author: user }
+  given!(:answers) { create_list :answer, 3, question: question, author: user }
 
   describe 'Authenticated user' do
     scenario 'can see the question and it answers' do

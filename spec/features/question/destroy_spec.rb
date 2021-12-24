@@ -8,7 +8,7 @@ feature 'Authenticated user can delete his question', "
   I'd like to be able to delete the question i created
 " do
   given!(:user) { create :user }
-  given(:question) { create :question, author_id: user.id }
+  given(:question) { create :question, author: user }
 
   background { sign_in(user) }
 
@@ -24,7 +24,7 @@ feature 'Authenticated user can delete his question', "
 
   scenario 'Authenticated user can delete others question' do
     other_user = create :user
-    others_question = create :question, author_id: other_user.id
+    others_question = create :question, author: other_user
 
     visit question_path(others_question)
 

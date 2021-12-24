@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
   let(:user) { create :user }
-  let(:question) { create :question, author_id: user.id }
+  let(:question) { create :question, author: user }
 
   describe 'POST #create' do
     before { login(user) }
@@ -15,7 +15,7 @@ RSpec.describe AnswersController, type: :controller do
           post :create,
                params: {
                  question_id: question,
-                 answer: attributes_for(:answer, question: question)
+                 answer: attributes_for(:answer, question: question, author: user)
                }
         end.to change(question.answers, :count).by(1)
       end
@@ -24,7 +24,7 @@ RSpec.describe AnswersController, type: :controller do
         post :create,
              params: {
                question_id: question,
-               answer: attributes_for(:answer, question: question)
+               answer: attributes_for(:answer, question: question, author: user)
              }
         expect(response).to redirect_to assigns(:question)
       end
@@ -35,14 +35,14 @@ RSpec.describe AnswersController, type: :controller do
         expect do
           post :create, params: {
             question_id: question,
-            answer: attributes_for(:answer, :invalid, question: question)
+            answer: attributes_for(:answer, :invalid, question: question, author: user)
           }
         end.to_not change(Answer, :count)
       end
       it 're-renders new view' do
         post :create, params: {
           question_id: question,
-          answer: attributes_for(:answer, :invalid, question: question)
+          answer: attributes_for(:answer, :invalid, question: question, author: user)
         }
         expect(response).to render_template :new
       end
