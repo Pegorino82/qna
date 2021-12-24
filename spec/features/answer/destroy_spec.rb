@@ -32,7 +32,7 @@ feature 'Authenticated user can delete his answer', "
 
       visit question_path(others_question)
 
-      expect(page).to_not have_content I18n.t('questions.show.delete_answer')
+      expect(page).to_not have_link I18n.t('questions.show.delete_answer')
     end
   end
 

@@ -11,11 +11,11 @@ RSpec.describe User, type: :model do
   context 'User author' do
     let(:question) { create :question, author: user }
     it 'of question' do
-      expect user.author_of?(question) == true
+      expect(user).to be_author_of(question)
     end
     it 'of answer' do
       answer = create :answer, question: question, author: user
-      expect user.author_of?(answer) == true
+      expect(user).to be_author_of(answer)
     end
   end
 
@@ -23,11 +23,11 @@ RSpec.describe User, type: :model do
     let(:another_user) { create :user }
     let(:question) { create :question, author: another_user }
     it 'of question' do
-      expect user.author_of?(question) == false
+      expect(user).to_not be_author_of(question)
     end
     it 'of answer' do
       answer = create :answer, question: question, author: another_user
-      expect user.author_of?(answer) == false
+      expect(user).to_not be_author_of(answer)
     end
   end
 end
