@@ -4,6 +4,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :find_question, only: %i[show edit update destroy]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_not_found
+
   def index
     @questions = Question.all
   end
@@ -19,7 +21,7 @@ class QuestionsController < ApplicationController
   def edit; end
 
   def create
-    @question = Question.new(question_params)
+    @question = current_user.authorship.build(question_params)
 
     if @question.save
       redirect_to @question, notice: t('.success')
@@ -39,8 +41,12 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy
-    redirect_to questions_path
+    if @question.author_id == current_user.id
+      @question.destroy
+      redirect_to questions_path
+    else
+      redirect_to @question, notice: t('.destroy.errors.other')
+    end
   end
 
   private
@@ -51,5 +57,9 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :body)
+  end
+
+  def rescue_with_not_found
+    render plain: 'Not found'
   end
 end

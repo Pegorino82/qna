@@ -17,12 +17,16 @@ en:
       body: 'Body'
     show:
       header: 'Question'
+      delete: 'Delete question'
       answers: 'Answers'
       your_answer: 'Your answer'
     new:
       ask: 'Ask'
     create:
       success: 'Your question successfully created.'
+    destroy:
+      errors:
+        other: "You can not delete other's question."
   answers:
     create:
       success: 'Answer created'
