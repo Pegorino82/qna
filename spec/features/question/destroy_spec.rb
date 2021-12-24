@@ -10,22 +10,30 @@ feature 'Authenticated user can delete his question', "
   given!(:user) { create :user }
   given(:question) { create :question, author: user }
 
-  background { sign_in(user) }
+  context 'Authenticated user as author' do
+    background { sign_in(user) }
 
-  scenario 'Authenticated user can delete his question' do
-    visit question_path(question)
+    scenario 'can delete his question' do
+      visit question_path(question)
 
-    click_on I18n.t('questions.show.delete')
+      click_on I18n.t('questions.show.delete')
 
-    expect(page).to_not have_content question.title
+      expect(page).to_not have_content question.title
+    end
+
+    scenario 'can not delete others question' do
+      other_user = create :user
+      others_question = create :question, author: other_user
+
+      visit question_path(others_question)
+
+      expect(page).to_not have_link I18n.t('questions.show.delete')
+    end
   end
 
-  scenario 'Authenticated user can not delete others question' do
-    other_user = create :user
-    others_question = create :question, author: other_user
+  scenario 'Unauthenticated use can not delete question' do
+    visit question_path(question)
 
-    visit question_path(others_question)
-
-    expect(page).to_not have_content I18n.t('questions.show.delete')
+    expect(page).to_not have_link I18n.t('questions.show.delete')
   end
 end

@@ -3,7 +3,7 @@ h3= t('.header')
 p= @question.title
 p= @question.body
 
-- if user_signed_in? && current_user.author_of?(@question)
+- if current_user&.author_of?(@question)
   p= link_to t('.delete'), question_path(@question), method: :delete, confirm: 'Delete?'
 
 h4= t('.answers')
@@ -11,9 +11,4 @@ ul
   =render @question.answers
 
 h4= t('.your_answer')
-= form_with model: [@question, @answer],
-        url: question_answers_path(@question),
-        local: true do |f|
-  = f.label :body
-  = f.text_area :body
-  = f.submit t('answers.create.submit')
+=render 'form_answer', question: @question, answer: @answer

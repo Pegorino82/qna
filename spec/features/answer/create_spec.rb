@@ -10,20 +10,33 @@ feature 'Authenticated user can create an answer', "
   given(:user) { create :user }
   given(:question) { create :question, author: user }
 
-  scenario 'Authenticated user can create an answer to the question' do
-    sign_in(user)
+  describe 'Authenticated user' do
+    background do
+      sign_in(user)
 
-    visit question_path(question)
+      visit question_path(question)
+    end
 
-    fill_in 'Body', with: 'Answer body'
-    click_on I18n.t('answers.create.submit')
+    scenario 'tries create an answer to the question' do
+      fill_in 'Body', with: 'Answer body'
 
-    expect(page).to have_content I18n.t('answers.create.success')
-    expect(page).to have_content question.title
-    expect(page).to have_content question.body
+      click_on I18n.t('answers.create.submit')
 
-    expect(page).to have_content I18n.t('questions.show.answers')
-    expect(page).to have_content 'Answer body'
+      expect(page).to have_content I18n.t('answers.create.success')
+      expect(page).to have_content question.title
+      expect(page).to have_content question.body
+
+      expect(page).to have_content I18n.t('questions.show.answers')
+      expect(page).to have_content 'Answer body'
+    end
+
+    scenario 'tries create an answer with errors to the question' do
+      # save_and_open_page
+      click_on I18n.t('answers.create.submit')
+      save_and_open_page
+
+      expect(page).to have_content "Body can't be blank"
+    end
   end
 
   scenario 'Unauthenticated user can not create an answer to the question' do
