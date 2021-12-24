@@ -7,14 +7,13 @@ feature 'User can view list of questions', "
   As an user
   I'd like to be able to see all questions
 " do
-  given!(:questions) { create_list :question, 3 }
+  given(:user) { create :user }
+  given!(:questions) { create_list :question, 3, author_id: user.id }
 
   background { visit questions_path }
 
   describe 'Authenticated user' do
     scenario 'can see a list of all questions' do
-      user = create :user
-
       sign_in(user)
 
       expect(page.all('tbody tr').count).to eq 3

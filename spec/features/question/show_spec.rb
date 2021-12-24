@@ -7,13 +7,12 @@ feature 'User can view question and it answers', "
   As an user
   I'd like to be able to see the question and it answers
 " do
-  given(:question) { create :question }
+  given(:user) { create :user }
+  given(:question) { create :question, author_id: user.id }
   given!(:answers) { create_list :answer, 3, question: question }
 
   describe 'Authenticated user' do
     scenario 'can see the question and it answers' do
-      user = create :user
-
       sign_in(user)
 
       visit question_path(question)

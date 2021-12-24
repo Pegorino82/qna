@@ -7,11 +7,10 @@ feature 'Authenticated user can create an answer', "
   As an authenticated user
   I'd like to be able to create an answer
 " do
-  given(:question) { create :question }
+  given(:user) { create :user }
+  given(:question) { create :question, author_id: user.id }
 
   scenario 'Authenticated user can create an answer to the question' do
-    user = create :user
-
     sign_in(user)
 
     visit question_path(question)
