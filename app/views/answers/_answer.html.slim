@@ -1,2 +1,5 @@
 - unless answer.body.nil?
-  li= answer.body
+  = render 'shared/errors', resource: answer
+  li
+    p= answer.body
+    p= link_to t('questions.show.delete_answer'), answer_path(answer), method: :delete, data: { answer_id: answer.id }
