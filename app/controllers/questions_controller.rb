@@ -4,8 +4,6 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :find_question, only: %i[show edit update destroy]
 
-  rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_not_found
-
   def index
     @questions = Question.all
   end
@@ -41,7 +39,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    if @question.author_id == current_user.id
+    if current_user.author_of?(@question)
       @question.destroy
       redirect_to questions_path
     else
@@ -57,9 +55,5 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :body)
-  end
-
-  def rescue_with_not_found
-    render plain: 'Not found'
   end
 end

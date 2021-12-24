@@ -17,9 +17,7 @@ feature 'Authenticated user can delete his question', "
 
     click_on I18n.t('questions.show.delete')
 
-    visit question_path(question)
-
-    expect(page).to have_content 'Not found'
+    expect(page).to_not have_content question.title
   end
 
   scenario 'Authenticated user can delete others question' do
