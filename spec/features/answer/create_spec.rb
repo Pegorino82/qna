@@ -15,8 +15,6 @@ feature 'Authenticated user can create an answer', "
 
     visit question_path(question)
 
-    answers_count = question.answers.count
-
     fill_in 'Body', with: 'Answer body'
     click_on I18n.t('answers.create.submit')
 
@@ -25,10 +23,10 @@ feature 'Authenticated user can create an answer', "
     expect(page).to have_content question.body
 
     expect(page).to have_content I18n.t('questions.show.answers')
-    expect(page.all('li').count).to eq answers_count + 1
+    expect(page).to have_content 'Answer body'
   end
 
-  scenario 'Unauthenticated user can create an answer to the question' do
+  scenario 'Unauthenticated user can not create an answer to the question' do
     visit question_path(question)
 
     fill_in 'Body', with: 'Answer body'
