@@ -12,7 +12,7 @@ class AnswersController < ApplicationController
     if @answer.save
       redirect_to @question, notice: t('answers.create.success')
     else
-      render :new
+      redirect_to @question, alert: @answer.errors.full_messages.join(', ')
     end
   end
 
