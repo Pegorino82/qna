@@ -22,10 +22,6 @@ feature 'Authenticated user can create an answer', "
 
       click_on I18n.t('answers.create.submit')
 
-      expect(page).to have_content I18n.t('answers.create.success')
-      expect(page).to have_content question.title
-      expect(page).to have_content question.body
-
       expect(page).to have_content I18n.t('questions.show.answers')
       within '.answers' do  # to be sure we are looking for answer in answers
         expect(page).to have_content 'Answer body'
