@@ -18,7 +18,8 @@ en:
     show:
       header: 'Question'
       delete: 'Delete question'
-      delete_answer: 'Delete answer'
+      delete_answer: 'Delete'
+      edit_answer: 'Edit'
       answers: 'Answers'
       your_answer: 'Your answer'
     new:
@@ -32,6 +33,8 @@ en:
     create:
       success: 'Answer created'
       submit: 'Create answer'
+    edit:
+      submit: 'Save'
     destroy:
       success: 'Your answer was successfully delete'
       error:

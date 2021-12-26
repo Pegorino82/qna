@@ -38,9 +38,6 @@ feature 'Authenticated user can create an answer', "
   scenario 'Unauthenticated user can not create an answer to the question' do
     visit question_path(question)
 
-    fill_in 'Body', with: 'Answer body'
-    click_on I18n.t('answers.create.submit')
-
-    expect(page).to have_content I18n.t('devise.failure.unauthenticated')
+    expect(page).to_not have_content I18n.t('answers.create.submit')
   end
 end
