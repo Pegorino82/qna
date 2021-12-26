@@ -10,7 +10,7 @@ feature 'Authenticated user can create an answer', "
   given(:user) { create :user }
   given(:question) { create :question, author: user }
 
-  describe 'Authenticated user' do
+  describe 'Authenticated user', js: true do
     background do
       sign_in(user)
 
@@ -27,13 +27,13 @@ feature 'Authenticated user can create an answer', "
       expect(page).to have_content question.body
 
       expect(page).to have_content I18n.t('questions.show.answers')
-      expect(page).to have_content 'Answer body'
+      within '.answers' do  # to be sure we are looking for answer in answers
+        expect(page).to have_content 'Answer body'
+      end
     end
 
     scenario 'tries create an answer with errors to the question' do
-      # save_and_open_page
       click_on I18n.t('answers.create.submit')
-      save_and_open_page
 
       expect(page).to have_content "Body can't be blank"
     end
