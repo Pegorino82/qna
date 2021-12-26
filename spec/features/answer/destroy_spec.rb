@@ -12,7 +12,7 @@ feature 'Authenticated user can delete his answer', "
   context 'Authenticated user' do
     background { sign_in(user) }
 
-    scenario 'can delete his answer' do
+    scenario 'can delete his answer', js: true do
       question = create :question, author: user
       answer = create :answer, question: question, author: user
 
