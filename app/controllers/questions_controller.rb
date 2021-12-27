@@ -29,13 +29,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    @question.update(question_params)
-
-    if @question.save
-      redirect_to @question
-    else
-      render :edit
-    end
+    @question.update(question_params) if current_user.author_of?(@question)
   end
 
   def destroy
