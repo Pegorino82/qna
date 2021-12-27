@@ -18,6 +18,7 @@ en:
     show:
       header: 'Question'
       delete: 'Delete question'
+      edit: 'Edit question'
       delete_answer: 'Delete'
       edit_answer: 'Edit'
       answers: 'Answers'
@@ -29,12 +30,16 @@ en:
     destroy:
       errors:
         other: "You can not delete other's question."
+    edit:
+      submit: 'Save'
   answers:
     create:
       success: 'Answer created'
       submit: 'Create answer'
     edit:
       submit: 'Save'
+      errors:
+        other: "You can not edit other's answer."
     destroy:
       success: 'Your answer was successfully delete'
       error:

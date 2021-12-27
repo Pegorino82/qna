@@ -87,29 +87,29 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
-  describe 'PATCH #update' do
+  describe 'PATCH #update', js: true do
     before { login(user) }
 
     context 'with valid attributes' do
       it 'assigns the requested question to @question' do
-        patch :update, params: { id: question, question: attributes_for(:question) }
+        patch :update, params: { id: question, question: attributes_for(:question) }, format: :js
         expect(assigns(:question)).to eq question
       end
       it 'changes question attributes' do
-        patch :update, params: { id: question, question: { title: 'New title', body: 'New body' } }
+        patch :update, params: { id: question, question: { title: 'New title', body: 'New body' } }, format: :js
         question.reload
 
         expect(question.title).to eq 'New title'
         expect(question.body).to eq 'New body'
       end
       it 'redirects to updated question' do
-        patch :update, params: { id: question, question: attributes_for(:question) }
+        patch :update, params: { id: question, question: attributes_for(:question) }, format: :js
         expect(response).to redirect_to question
       end
     end
 
     context 'with invalid attributes' do
-      before { patch :update, params: { id: question, question: attributes_for(:question, :invalid) } }
+      before { patch :update, params: { id: question, question: attributes_for(:question, :invalid) }, format: :js }
 
       it 'does not change the question' do
         question.reload
@@ -118,7 +118,20 @@ RSpec.describe QuestionsController, type: :controller do
         expect(question.body).to eq 'Test Question Body'
       end
       it 're-renders edit view' do
-        expect(response).to render_template :edit
+        expect(response).to render_template :update
+      end
+    end
+
+    context 'user is not author' do
+      let(:other_user) { create :user }
+      let!(:other_question) { create :question, author: other_user }
+
+      it "doesn't change other's question" do
+        patch :update, params: { id: other_question, question: { title: 'Edited Title', body: 'Edited Body' } }, format: :js
+        other_question.reload
+
+        expect(other_question.title).to eq 'Test Question Title'
+        expect(other_question.body).to eq 'Test Question Body'
       end
     end
   end
