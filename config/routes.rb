@@ -4,5 +4,8 @@ Rails.application.routes.draw do
 
   resources :questions do
     resources :answers, shallow: true, only: %i[create update destroy]
+    member do
+      patch :best_answer
+    end
   end
 end
