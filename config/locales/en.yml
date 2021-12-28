@@ -19,6 +19,7 @@ en:
       header: 'Question'
       delete: 'Delete question'
       edit: 'Edit question'
+      mark_best_answer: 'Mark as best'
       delete_answer: 'Delete'
       edit_answer: 'Edit'
       answers: 'Answers'

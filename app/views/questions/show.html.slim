@@ -21,8 +21,10 @@ h3= t('.header')
     p= f.submit t('questions.edit.submit')
 
 h4= t('.answers')
+
 ul.answers
-  =render @question.answers
+  =render @question.best_answer, answer_class: 'best_answer' unless @question.best_answer_id.nil?
+  =render @question.answers_without_best, answer_class: nil
 
 - if user_signed_in?
   h4= t('.your_answer')
