@@ -30,7 +30,7 @@ feature 'User can choose best answer for his question', "
     end
 
     scenario 'can choose another best answer' do
-      question.set_best_answer(answers.first.id)
+      answers.first.mark_as_best
       new_best_answer = answers.last
 
       within ".answers li#answer-#{new_best_answer.id}" do

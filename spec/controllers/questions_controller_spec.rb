@@ -166,32 +166,4 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
   end
-
-  describe 'PATCH #best_answer', js: true do
-    before { login(user) }
-
-    context 'user is author' do
-      let!(:answer) { create :answer, question: question, author: user }
-
-      it 'can set best answer' do
-        patch :best_answer, params: { id: question, best_answer: answer }, format: :js
-        question.reload
-
-        expect(question.best_answer).to eq answer
-      end
-    end
-
-    context 'user is not author' do
-      let(:other_user) { create :user }
-      let!(:other_question) { create :question, author: other_user }
-      let!(:answer) { create :answer, question: other_question, author: other_user }
-
-      it "doesn't set best answer" do
-        patch :best_answer, params: { id: other_question, best_answer: answer }, format: :js
-        other_question.reload
-
-        expect(other_question.best_answer).to_not eq answer
-      end
-    end
-  end
 end
