@@ -5,7 +5,7 @@
     p= "#{answer.body} (#{answer.author.email})"
     - if current_user&.author_of?(answer.question)
       p= link_to t('questions.show.mark_best_answer'),
-              best_answer_question_path(answer.question, best_answer: answer.id),
+              best_answer_answer_path(answer),
               method: :patch,
               remote: true,
               class: 'best-answer-link',

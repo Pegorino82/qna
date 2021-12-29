@@ -2,7 +2,7 @@
 
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :find_question, only: %i[show edit update destroy best_answer]
+  before_action :find_question, only: %i[show edit update destroy]
 
   def index
     @questions = Question.all
@@ -39,11 +39,6 @@ class QuestionsController < ApplicationController
     else
       redirect_to @question, notice: t('.destroy.errors.other')
     end
-  end
-
-  def best_answer
-    best_answer_id = params[:best_answer]
-    @question.set_best_answer(best_answer_id) if current_user.author_of?(@question)
   end
 
   private

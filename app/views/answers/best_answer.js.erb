@@ -1,0 +1,11 @@
+<% unless @answer.errors.present? %>
+document.querySelector(`.answer_errors_${<%= @answer.id %>}`)
+    .parentNode.removeChild(document.querySelector(`.answer_errors_${<%= @answer.id %>}`));
+document.querySelector('<%= "li#answer-#{@answer.id}" %>')
+    .parentNode.removeChild(document.querySelector('<%= "li#answer-#{@answer.id}" %>'));
+
+document.querySelector('.answers .best_answer').classList.toggle('best_answer');
+
+document.querySelector('.answers').insertAdjacentHTML('afterbegin', '<%= j render @answer, answer_class: 'best_answer' %>')
+document.querySelector('.answers').insertAdjacentHTML('afterbegin', '<%= render 'shared/errors', resource: @answer %>')
+<% end %>

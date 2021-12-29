@@ -5,10 +5,6 @@ class Question < ApplicationRecord
 
   validates :title, :body, presence: true
 
-  def set_best_answer(answer_id)
-    update(best_answer_id: answer_id)
-  end
-
   def answers_without_best
     answers.where.not(id: best_answer_id)
   end
