@@ -40,4 +40,7 @@ ul.answers
     p
       = f.label :body
       = f.text_area :body
+    p
+      = f.label :files
+      = f.file_field :files, multiple: true
     p= f.submit t('answers.create.submit')

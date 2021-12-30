@@ -3,6 +3,9 @@
     = render 'shared/errors', resource: answer
   li id="answer-#{answer.id}" class=answer_class
     p= "#{answer.body} (#{answer.author.email})"
+    - if answer.files.attached?
+      - answer.files.each do |file|
+        p= link_to file.filename.to_s, url_for(file)
     - if current_user&.author_of?(answer.question)
       p= link_to t('questions.show.mark_best_answer'),
               best_answer_answer_path(answer),
