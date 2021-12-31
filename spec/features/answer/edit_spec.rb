@@ -31,6 +31,18 @@ feature 'Authenticated user can edit his answer', "
       end
     end
 
+    scenario 'add files when edit his answer' do
+      click_on I18n.t('questions.show.edit_answer')
+
+      within '.answers' do
+        attach_file 'Files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
+        click_button I18n.t('answers.edit.submit')
+
+        expect(page).to have_link 'rails_helper.rb'
+        expect(page).to have_link 'spec_helper.rb'
+      end
+    end
+
     scenario 'edit his answer with errors' do
       within '.answers' do  # to be sure we are looking for answer in answers
         click_on I18n.t('questions.show.edit_answer')
