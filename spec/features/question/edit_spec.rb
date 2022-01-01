@@ -50,7 +50,7 @@ feature 'Authenticated user can edit his question', "
         attach_file 'Files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
         click_on I18n.t('answers.edit.submit')
 
-        find('#question_files').first(:link, I18n.t('questions.show.delete_file')).click
+        find('#question_files').first(:link, I18n.t('files.destroy.delete')).click
 
         expect(page).to_not have_link 'rails_helper.rb'
       end

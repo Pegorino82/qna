@@ -46,3 +46,6 @@ en:
       success: 'Your answer was successfully delete'
       error:
         other: "You can not delete other's answer."
+  files:
+    destroy:
+      delete: 'Delete'

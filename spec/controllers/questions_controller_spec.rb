@@ -146,13 +146,13 @@ RSpec.describe QuestionsController, type: :controller do
         expect { delete :destroy, params: { id: question } }.to change(Question, :count).by(-1)
       end
 
-      it 'deletes a file', js: true do
-        file = fixture_file_upload("#{Rails.root}/spec/rails_helper.rb", 'text/plain')
-        question.files.attach(file)
-
-        expect { delete :destroy, params: { id: question, file_id: question.files.first }, format: :js }
-          .to change(question.files, :count).by(-1)
-      end
+      # it 'deletes a file', js: true do
+      #   file = fixture_file_upload("#{Rails.root}/spec/rails_helper.rb", 'text/plain')
+      #   question.files.attach(file)
+      #
+      #   expect { delete :destroy, params: { id: question, file_id: question.files.first }, format: :js }
+      #     .to change(question.files, :count).by(-1)
+      # end
 
       it 'redirects to index' do
         delete :destroy, params: { id: question }

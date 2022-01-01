@@ -2,6 +2,7 @@
   - question.files.each do |file|
     div id = "file_id_#{file.id}"
       p= link_to file.filename.to_s, url_for(file)
-      p= link_to t('questions.show.delete_file'), question_path(question, file_id: file.id),
+      p= link_to t('files.destroy.delete'),
+              file_path(file),
               method: :delete,
               remote: true
