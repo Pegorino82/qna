@@ -34,8 +34,13 @@ class QuestionsController < ApplicationController
 
   def destroy
     if current_user.author_of?(@question)
-      @question.destroy
-      redirect_to questions_path
+      if params[:file_id].nil?
+        @question.destroy
+        redirect_to questions_path
+      else
+        @file = @question.files.find_by_id(params[:file_id])
+        @file.purge
+      end
     else
       redirect_to @question, notice: t('.destroy.errors.other')
     end

@@ -146,6 +146,14 @@ RSpec.describe QuestionsController, type: :controller do
         expect { delete :destroy, params: { id: question } }.to change(Question, :count).by(-1)
       end
 
+      it 'deletes a file', js: true do
+        file = fixture_file_upload("#{Rails.root}/spec/rails_helper.rb", 'text/plain')
+        question.files.attach(file)
+
+        expect { delete :destroy, params: { id: question, file_id: question.files.first }, format: :js }
+          .to change(question.files, :count).by(-1)
+      end
+
       it 'redirects to index' do
         delete :destroy, params: { id: question }
         expect(response).to redirect_to questions_path
@@ -158,6 +166,14 @@ RSpec.describe QuestionsController, type: :controller do
 
       it 'does not delete the question' do
         expect { delete :destroy, params: { id: other_question } }.to_not change(Question, :count)
+      end
+
+      it 'does not delete file' do
+        file = fixture_file_upload("#{Rails.root}/spec/rails_helper.rb", 'text/plain')
+        other_question.files.attach(file)
+
+        expect { delete :destroy, params: { id: other_question, file_id: other_question.files.first } }
+          .to_not change(question.files, :count)
       end
 
       it 'redirects to question' do

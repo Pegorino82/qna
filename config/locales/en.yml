@@ -18,6 +18,7 @@ en:
     show:
       header: 'Question'
       delete: 'Delete question'
+      delete_file: 'Delete'
       edit: 'Edit question'
       mark_best_answer: 'Mark as best'
       delete_answer: 'Delete'
