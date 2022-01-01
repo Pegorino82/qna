@@ -5,7 +5,7 @@ h3= t('.header')
   p#question_body= @question.body
 
   #question_files
-    =render 'files', question: @question
+    =render 'shared/files', resource: @question
 
   - if current_user&.author_of?(@question)
     p= link_to t('.delete'), question_path(@question), method: :delete, confirm: 'Delete?'

@@ -1,5 +1,5 @@
-- if question.files.attached?
-  - question.files.each do |file|
+- if resource.files.attached?
+  - resource.files.each do |file|
     div id = "file_id_#{file.id}"
       p= link_to file.filename.to_s, url_for(file)
       p= link_to t('files.destroy.delete'),

@@ -43,6 +43,19 @@ feature 'Authenticated user can edit his answer', "
       end
     end
 
+    scenario 'can delete file', js: true do
+      click_on I18n.t('questions.show.edit_answer')
+
+      within '.answers' do
+        attach_file 'Files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
+        click_on I18n.t('answers.edit.submit')
+
+        find("#answer_#{answer.id}_files").first(:link, I18n.t('files.destroy.delete')).click
+
+        expect(page).to_not have_link 'rails_helper.rb'
+      end
+    end
+
     scenario 'edit his answer with errors' do
       within '.answers' do  # to be sure we are looking for answer in answers
         click_on I18n.t('questions.show.edit_answer')
