@@ -3,10 +3,10 @@
         local: false,
         html: { id: "edit-answer-#{answer.id}",
                 class: 'hidden' } do |f|
-  p
-    = f.label :body
-    = f.text_area :body
-  p
-    = f.label :files
-    = f.file_field :files, multiple: true
-  p= f.submit t('answers.edit.submit')
+  div class='mb-3'
+    = f.label :body, class: 'form-label'
+    = f.text_area :body, class: 'form-control'
+  div class='mb-3'
+    = f.label :files, class: 'form-label'
+    = f.file_field :files, multiple: true, class: 'form-control'
+  p= f.submit t('answers.edit.submit'), class: 'btn btn-light border mb-3'

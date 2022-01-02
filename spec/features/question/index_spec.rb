@@ -16,11 +16,11 @@ feature 'User can view list of questions', "
     scenario 'can see a list of all questions' do
       sign_in(user)
 
-      expect(page.all('tbody tr').count).to eq 3
+      expect(page.all('.question-item').count).to eq 3
     end
   end
 
   scenario 'Unauthenticated user can see a list of questions' do
-    expect(page.all('tbody tr').count).to eq 3
+    expect(page.all('.question-item').count).to eq 3
   end
 end

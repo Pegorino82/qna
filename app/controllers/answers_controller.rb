@@ -18,9 +18,9 @@ class AnswersController < ApplicationController
   def destroy
     if current_user.author_of?(@answer)
       @answer.destroy
-      flash[:notice] = t('.success')
+      flash.now[:notice] = t('.success')
     else
-      flash[:notice] = t('.destroy.error.other')
+      flash.now[:notice] = t('.destroy.error.other')
     end
   end
 

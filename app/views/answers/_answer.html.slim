@@ -1,20 +1,23 @@
 - if answer.persisted?
-  div class="answer_errors_#{answer.id}"
-    = render 'shared/errors', resource: answer
   li id="answer-#{answer.id}" class=answer_class
-    p= "#{answer.body} (#{answer.author.email})"
-    div id="answer_#{answer.id}_files"
-      = render 'shared/files', resource: answer
-    - if current_user&.author_of?(answer.question)
-      p= link_to t('questions.show.mark_best_answer'),
-              best_answer_answer_path(answer),
-              method: :patch,
-              remote: true,
-              class: 'best-answer-link',
-              data: { best_answer: answer.id }
-    - if current_user&.author_of?(answer)
-      p= link_to t('questions.show.delete_answer'), answer_path(answer), method: :delete, remote: true
-      p= link_to t('questions.show.edit_answer'), '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+    .mt-2
+      p= "#{answer.body} (#{answer.author.email})"
+      div id="answer_#{answer.id}_files"
+        = render 'shared/files', resource: answer
+      div class='d-flex'
+        - if current_user&.author_of?(answer.question)
+          p= link_to t('questions.show.mark_best_answer'),
+                  best_answer_answer_path(answer),
+                  method: :patch,
+                  remote: true,
+                  class: 'best-answer-link mx-1',
+                  data: { best_answer: answer.id }
+        - if current_user&.author_of?(answer)
+          p= link_to t('questions.show.delete_answer'), answer_path(answer), method: :delete, remote: true, class: 'mx-1'
+          p= link_to t('questions.show.edit_answer'), '#', class: 'edit-answer-link mx-1', data: { answer_id: answer.id }
 
-    = render 'answers/form', answer: answer
+      div class="answer_errors_#{answer.id}"
+        = render 'shared/errors', resource: answer
+
+      = render 'answers/form', answer: answer
 

@@ -25,6 +25,7 @@ en:
       edit_answer: 'Edit'
       answers: 'Answers'
       your_answer: 'Your answer'
+      confirm_delete: 'Delete?'
     new:
       ask: 'Ask'
     create:

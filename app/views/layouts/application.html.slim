@@ -11,8 +11,14 @@ html
 
 
   body
-    = render 'shared/main_nav'
-    p.notice= notice
-    p.alert= alert
-    = yield
+    header class='navbar navbar-expand-md navbar-dark bd-navbar'
+      = render 'shared/main_nav'
+
+    div class='container-xxl my-md-4 bd-layout'
+      = render 'shared/flash'
+      div class='row'
+        aside class='col-1 border-end'
+          = render 'shared/side_bar'
+        main class="col"
+          = yield
 

@@ -1,11 +1,7 @@
-h3= t('.header')
+.questions-header
+  div class='d-flex justify-content-between mx-3'
+    h3= t('.header')
+    p= link_to t('.ask'), new_question_path
 
-p= link_to t('.ask'), new_question_path
-
-table
-  thead
-    tr
-      th= t('.title')
-      th= t('.body')
-  tbody
-    =render @questions
+.question-items
+  =render @questions

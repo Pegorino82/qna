@@ -2,6 +2,10 @@ document
     .querySelector('.answer_errors')
     .innerHTML = '<%= render 'shared/errors', resource: @answer %>'
 
+document
+    .querySelector('.flash')
+    .innerHTML = '<%= render 'shared/flash' %>'
+
 <% unless @answer.errors.present? %>
 const answer = document.querySelector(".answers li#answer-<%= @answer.id %>");
 answer.parentNode.removeChild(answer);

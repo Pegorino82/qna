@@ -46,7 +46,9 @@ gem 'devise'
 gem "aws-sdk-s3", require: false
 
 # Use Sass to process CSS
-# gem "sassc-rails"
+gem "sassc-rails"
+gem 'bootstrap', '~> 5.1.3'
+gem 'popper_js', '~> 2.9.3'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

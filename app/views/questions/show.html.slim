@@ -1,24 +1,26 @@
-h3= t('.header')
-
 .question
-  p#question_title= @question.title
-  p#question_body= @question.body
+  div class='question-title'
+    h3#question_title= @question.title
+  - if current_user&.author_of?(@question)
+    div class='d-flex'
+      p= link_to t('.delete'), question_path(@question), method: :delete, confirm: t('.confirm_delete'), class: 'mx-1'
+      p= link_to t('.edit'), '#', data: { question_id: @question.id }, class: 'edit-question-link mx-1'
+  div class='question-body m-1'
+    p#question_body= @question.body
 
   #question_files
     =render 'shared/files', resource: @question
-
-  - if current_user&.author_of?(@question)
-    p= link_to t('.delete'), question_path(@question), method: :delete, confirm: 'Delete?'
-    p= link_to t('.edit'), '#', data: { question_id: @question.id }, class: 'edit-question-link'
 
   .question_errors
     = render 'shared/errors', resource: @question
 
   = render 'form', form_local: false, form_class: 'hidden', submit_text: t('questions.edit.submit')
 
+hr
+
 h4= t('.answers')
 
-ul.answers
+ul class='answers list-group list-unstyled'
   =render @question.best_answer, answer_class: 'best_answer' unless @question.best_answer_id.nil?
   =render @question.answers_without_best, answer_class: nil
 
@@ -29,10 +31,10 @@ ul.answers
   = form_with model: [@question, @answer],
           local: false,
           class: 'new-answer' do |f|
-    p
-      = f.label :body
-      = f.text_area :body
-    p
-      = f.label :files
-      = f.file_field :files, multiple: true
-    p= f.submit t('answers.create.submit')
+    div class='mb-3'
+      = f.label :body, class: 'form-label'
+      = f.text_area :body, class: 'form-control'
+    div class='mb-3'
+      = f.label :files, class: 'form-label'
+      = f.file_field :files, multiple: true, class: 'form-control'
+    p= f.submit t('answers.create.submit'), class: 'btn btn-light border mb-3'

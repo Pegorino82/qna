@@ -1,11 +1,11 @@
 = form_with model: @question, local: form_local, class: form_class do |f|
-  p
-    = f.label :title
-    = f.text_field :title
-  p
-    = f.label :body
-    = f.text_area :body
-  p
-    = f.label :files
-    = f.file_field :files, multiple: true, direct_upload: true
-  p= f.submit submit_text
+  div class='mb-3'
+    = f.label :title, class: 'form-label'
+    = f.text_field :title, class: 'form-control'
+  div class='mb-3'
+    = f.label :body, class: 'form-label'
+    = f.text_area :body, class: 'form-control'
+  div class='mb-3'
+    = f.label :files, class: 'form-label'
+    = f.file_field :files, class: 'form-control', multiple: true, direct_upload: true
+  p= f.submit submit_text, class: 'btn btn-light border mb-3'
