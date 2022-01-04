@@ -41,7 +41,7 @@ feature 'User can choose best answer for his question', "
       expect(page).to have_selector("#answer-#{new_best_answer.id}.best_answer")
     end
 
-    scenario "best answer on the top" do
+    scenario 'best answer on the top' do
       best_answer = answers.last
 
       within ".answers li#answer-#{best_answer.id}" do
@@ -62,4 +62,3 @@ feature 'User can choose best answer for his question', "
     end
   end
 end
-

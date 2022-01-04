@@ -127,7 +127,8 @@ RSpec.describe QuestionsController, type: :controller do
       let!(:other_question) { create :question, author: other_user }
 
       it "doesn't change other's question" do
-        patch :update, params: { id: other_question, question: { title: 'Edited Title', body: 'Edited Body' } }, format: :js
+        patch :update, params: { id: other_question, question: { title: 'Edited Title', body: 'Edited Body' } },
+                       format: :js
         other_question.reload
 
         expect(other_question.title).to eq 'Test Question Title'

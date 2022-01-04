@@ -77,7 +77,9 @@ RSpec.describe AnswersController, type: :controller do
       let!(:other_answer) { create :answer, question: other_question, author: other_user }
 
       it 'does not delete the answer' do
-        expect { delete :destroy, params: { id: other_answer }, format: :js }.to_not change(other_question.answers, :count)
+        expect do
+          delete :destroy, params: { id: other_answer }, format: :js
+        end.to_not change(other_question.answers, :count)
       end
 
       it 'renders destroy template' do
@@ -98,7 +100,7 @@ RSpec.describe AnswersController, type: :controller do
               params: { id: answer, answer: { body: 'New body' } },
               format: :js
         answer.reload
-        expect(answer.body).to eq'New body'
+        expect(answer.body).to eq 'New body'
       end
 
       it 'renders update template' do

@@ -13,8 +13,7 @@ RSpec.describe FilesController, type: :controller do
 
       context 'question' do
         context 'user is author' do
-
-          it "deletes file" do
+          it 'deletes file' do
             expect { delete :destroy, params: { id: question.files.first }, format: :js }
               .to change(question.files, :count).by(-1)
           end
@@ -29,7 +28,7 @@ RSpec.describe FilesController, type: :controller do
           let(:other_user) { create :user }
           let!(:other_question) { create :question, author: other_user, files: [file] }
 
-          it "does not delete file" do
+          it 'does not delete file' do
             other_question.files.attach(file)
 
             expect { delete :destroy, params: { id: other_question.files.first }, format: :js }
@@ -47,7 +46,7 @@ RSpec.describe FilesController, type: :controller do
         context 'user is author' do
           let!(:answer) { create :answer, question: question, author: user, files: [file] }
 
-          it "deletes file" do
+          it 'deletes file' do
             expect { delete :destroy, params: { id: answer.files.first }, format: :js }
               .to change(answer.files, :count).by(-1)
           end
@@ -62,7 +61,7 @@ RSpec.describe FilesController, type: :controller do
           let(:other_user) { create :user }
           let!(:other_answer) { create :answer, question: question, author: other_user, files: [file] }
 
-          it "does not delete file" do
+          it 'does not delete file' do
             other_answer.files.attach(file)
 
             expect { delete :destroy, params: { id: other_answer.files.first }, format: :js }
