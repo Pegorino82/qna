@@ -8,4 +8,7 @@
   div class='mb-3'
     = f.label :files, class: 'form-label'
     = f.file_field :files, class: 'form-control', multiple: true, direct_upload: true
+
+  =render 'shared/form_nested_link', parent_form: f
+
   p= f.submit submit_text, class: 'btn btn-light border mb-3'

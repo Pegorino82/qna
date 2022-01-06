@@ -1,0 +1,5 @@
+- if resource.links.present?
+  p =t('links.index.header')
+  - resource.links.each do |link|
+    div class='d-flex content-align-between'
+      p= link_to link.title, url_for(link.url), class: 'mx-1', target: '_blank'

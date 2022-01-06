@@ -50,3 +50,8 @@ en:
   files:
     destroy:
       delete: 'Delete'
+  links:
+    new:
+      header: 'Links:'
+    index:
+      header: 'Links:'
