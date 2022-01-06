@@ -20,31 +20,45 @@ feature 'User can add links to question', "
       fill_in 'Body', with: 'Test body'
 
       click_on I18n.t('links.new.add')
-
-      fill_in 'Link title', with: 'My gist'
-      fill_in 'Url', with: gist_url
     end
 
-    scenario 'can add link when asks question' do
-      click_on I18n.t('questions.new.ask')
-
-      expect(page).to have_link 'My gist', href: gist_url
-    end
-
-    scenario 'can add several links when asks question' do
-      google_url = 'https://google.com'
-
-      click_on I18n.t('links.new.add')
-
-      within all('.nested_fields').last do
-        fill_in 'Link title', with: 'Google'
-        fill_in 'Url', with: google_url
+    context 'with correct url' do
+      background do
+        fill_in 'Link title', with: 'My gist'
+        fill_in 'Url', with: gist_url
       end
 
+      scenario 'can add link when asks question' do
+        click_on I18n.t('questions.new.ask')
+
+        expect(page).to have_link 'My gist', href: gist_url
+      end
+
+      scenario 'can add several links when asks question' do
+        google_url = 'https://google.com'
+
+        click_on I18n.t('links.new.add')
+
+        within all('.nested_fields').last do
+          fill_in 'Link title', with: 'Google'
+          fill_in 'Url', with: google_url
+        end
+
+        click_on I18n.t('questions.new.ask')
+
+        expect(page).to have_link 'My gist', href: gist_url
+        expect(page).to have_link 'Google', href: google_url
+      end
+    end
+
+    scenario 'can not add link with bad url' do
+      fill_in 'Link title', with: 'My gist'
+      fill_in 'Url', with: 'gist_url'
+
       click_on I18n.t('questions.new.ask')
 
-      expect(page).to have_link 'My gist', href: gist_url
-      expect(page).to have_link 'Google', href: google_url
+      expect(page).to_not have_link 'My gist', href: gist_url
+      expect(page).to have_content 'Links url is invalid'
     end
   end
 end
