@@ -53,5 +53,6 @@ en:
   links:
     new:
       header: 'Links:'
+      add: 'Add link'
     index:
       header: 'Links:'

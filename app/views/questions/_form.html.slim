@@ -9,6 +9,10 @@
     = f.label :files, class: 'form-label'
     = f.file_field :files, class: 'form-control', multiple: true, direct_upload: true
 
-  =render 'shared/form_nested_link', parent_form: f
+  p =t('links.new.header')
+  #links
+    = f.fields_for :links do |link|
+    .add_link
+      = link_to_add_association t('links.new.add'), f, :links, partial: 'links/link_fields'
 
   p= f.submit submit_text, class: 'btn btn-light border mb-3'

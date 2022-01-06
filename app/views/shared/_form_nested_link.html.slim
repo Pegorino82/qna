@@ -1,9 +1,0 @@
-.links
-  p =t('links.new.header')
-  = parent_form.fields_for :links do |link|
-    div class='mb-3'
-      = link.label :title, 'Link title', class: 'form-label'
-      = link.text_field :title, class: 'form-control'
-    div class='mb-3'
-      = link.label :url, class: 'form-label'
-      = link.text_field :url, class: 'form-control'
