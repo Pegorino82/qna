@@ -1,7 +1,8 @@
-.nested_fields
+.nested-fields
   div class='mb-3'
     = f.label :title, 'Link title', class: 'form-label'
     = f.text_field :title, class: 'form-control'
   div class='mb-3'
     = f.label :url, class: 'form-label'
     = f.text_field :url, class: 'form-control'
+  = link_to_remove_association t('links.new.remove'), f

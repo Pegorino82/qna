@@ -54,5 +54,8 @@ en:
     new:
       header: 'Links:'
       add: 'Add link'
+      remove: 'Remove link'
     index:
       header: 'Links:'
+    destroy:
+      delete: 'Delete'

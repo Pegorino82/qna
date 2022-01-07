@@ -39,7 +39,7 @@ feature 'User can add links to question', "
 
         click_on I18n.t('links.new.add')
 
-        within all('.nested_fields').last do
+        within all('.nested-fields').last do
           fill_in 'Link title', with: 'Google'
           fill_in 'Url', with: google_url
         end

@@ -53,6 +53,17 @@ feature 'Authenticated user can edit his question', "
         end
       end
 
+      scenario 'can delete link' do
+        link = create :link, linkable: question
+        visit question_path(question)
+
+        within '.question' do
+          find('#question_links').first(:link, I18n.t('links.destroy.delete')).click
+
+          expect(page).to_not have_link link.title
+        end
+      end
+
       scenario 'edit his question with errors' do
         within '.question' do
           fill_in 'Title', with: ''
@@ -82,21 +93,34 @@ feature 'Authenticated user can edit his question', "
           expect(page).to_not have_link I18n.t('files.destroy.delete')
         end
       end
+
+      scenario "tries to delete other's link" do
+        create :link, linkable: other_question
+        visit question_path(other_question)
+
+        within '.question > #question_links' do
+          expect(page).to_not have_link I18n.t('links.destroy.delete')
+        end
+      end
     end
   end
 
   describe 'Unauthenticated user' do
-    scenario 'can not edit question' do
-      visit question_path(question)
+    background { visit question_path(question) }
 
+    scenario 'can not edit question' do
       expect(page).to_not have_link I18n.t('questions.show.edit')
     end
 
     scenario 'can not delete file' do
-      visit question_path(question)
-
       within '.question > #question_files' do
         expect(page).to_not have_link I18n.t('files.destroy.delete')
+      end
+    end
+
+    scenario 'can not delete file' do
+      within '.question > #question_links' do
+        expect(page).to_not have_link I18n.t('links.destroy.delete')
       end
     end
   end
