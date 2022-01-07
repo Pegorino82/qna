@@ -9,6 +9,7 @@ feature 'Authenticated user can edit his question', "
 " do
   given!(:user) { create :user }
   given!(:question) { create :question, author: user }
+  given!(:link) { create :link, linkable: question }
 
   describe 'Authenticated user' do
     background { sign_in(user) }
@@ -42,6 +43,19 @@ feature 'Authenticated user can edit his question', "
         end
       end
 
+      scenario 'add links when edit question' do
+        within '.question' do
+          click_on I18n.t('links.new.add')
+
+          fill_in 'Link title', with: 'New link'
+          fill_in 'Url', with: 'http://new_link.com'
+
+          click_on I18n.t('questions.edit.submit')
+
+          expect(page).to have_link 'New link'
+        end
+      end
+
       scenario 'can delete file' do
         within '.question' do
           attach_file 'Files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
@@ -54,9 +68,6 @@ feature 'Authenticated user can edit his question', "
       end
 
       scenario 'can delete link' do
-        link = create :link, linkable: question
-        visit question_path(question)
-
         within '.question' do
           find('#question_links').first(:link, I18n.t('links.destroy.delete')).click
 
