@@ -4,6 +4,8 @@
       p= "#{answer.body} (#{answer.author.email})"
       div id="answer_#{answer.id}_files"
         = render 'shared/files', resource: answer
+      div id="answer_#{answer.id}_links"
+        = render 'shared/links', resource: answer
       div class='d-flex'
         - if current_user&.author_of?(answer.question)
           p= link_to t('questions.show.mark_best_answer'),

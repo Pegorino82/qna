@@ -129,7 +129,7 @@ feature 'Authenticated user can edit his question', "
       end
     end
 
-    scenario 'can not delete file' do
+    scenario 'can not delete link' do
       within '.question > #question_links' do
         expect(page).to_not have_link I18n.t('links.destroy.delete')
       end

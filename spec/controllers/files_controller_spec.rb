@@ -92,13 +92,13 @@ RSpec.describe FilesController, type: :controller do
       context 'answer' do
         let!(:answer) { create :answer, question: question, author: user, files: [file] }
 
-        it "can't delete question's file" do
-          expect { delete :destroy, params: { id: question.files.first }, format: :js }
-            .to_not change(question.files, :count)
+        it "can't delete answer's file" do
+          expect { delete :destroy, params: { id: answer.files.first }, format: :js }
+            .to_not change(answer.files, :count)
         end
 
         it 'renders destroy' do
-          delete :destroy, params: { id: question.files.first }, format: :js
+          delete :destroy, params: { id: answer.files.first }, format: :js
           expect(response).to have_http_status(401)
         end
       end

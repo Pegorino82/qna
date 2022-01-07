@@ -7,7 +7,7 @@ document
     .innerHTML = '<%= render 'shared/flash' %>'
 
 <% unless @answer.errors.present? %>
-const answer = document.querySelector(".answers li#answer-<%= @answer.id %>");
-answer.parentNode.removeChild(answer);
-document.querySelector('body p.notice').innerText = '<%= flash[:notice] %>'
+document.querySelector(".answers li#answer-<%= @answer.id %>").parentNode
+    .removeChild(document.querySelector(".answers li#answer-<%= @answer.id %>"));
+document.querySelector('.flash .alert').innerText = '<%= flash[:notice] %>'
 <% end %>
