@@ -2,7 +2,7 @@
   p =t('links.index.header')
   - resource.links.each do |link|
     div id="link_id_#{link.id}" class='d-flex content-align-between'
-      p= link_to link.title, url_for(link.url), class: 'mx-1', target: '_blank'
+      p= link_to link.title, url_for(link.url), class: 'resource-link mx-1', target: '_blank'
       - if current_user&.author_of?(resource)
         p= link_to t('links.destroy.delete'),
                 link_path(link),
