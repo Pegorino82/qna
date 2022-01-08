@@ -16,6 +16,7 @@ class QuestionsController < ApplicationController
   def new
     @question = Question.new
     @question.links.build
+    @award = Award.new(question: @question)
   end
 
   def edit; end
@@ -50,6 +51,10 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, files: [], links_attributes: [:title, :url])
+    params.require(:question).permit(:title,
+                                     :body,
+                                     files: [],
+                                     links_attributes: [:title, :url],
+                                     award_attributes: [:title, :image])
   end
 end

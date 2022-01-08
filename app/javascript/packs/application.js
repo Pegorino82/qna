@@ -11,6 +11,7 @@ import 'jquery'
 import '@nathanvda/cocoon'
 import '../answers'
 import '../questions'
+import '../awards'
 
 Rails.start()
 Turbolinks.start()

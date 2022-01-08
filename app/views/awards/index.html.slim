@@ -1,0 +1,12 @@
+h3 =t('.header')
+
+- current_user.awards.each do |award|
+  div class='award-item card mb-3'
+    div class='row g-0'
+      div class='col-md-4 border-end'
+        h5 class='award-title card-title' = award.title
+        =image_tag url_for(award.image), class: "card-img"
+      div class='col-md-8'
+        div class='card-body'
+          p class='question-title card-title' = link_to award.question.title, question_path(award.question)
+          p class='question-body card-text' = award.question.body

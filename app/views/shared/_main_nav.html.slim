@@ -2,6 +2,7 @@ nav class='container d-flex justify-content-end'
   div class='d-flex'
     -if user_signed_in?
       p class='m-2' = current_user.email
+      p class='m-2' = link_to t('main_nav.awards'), awards_path
       p class='m-2' = link_to t('main_nav.sign_out'),
               destroy_user_session_path,
               method: :delete

@@ -1,0 +1,8 @@
+div class='hidden award_fields'
+  div class='mb-3'
+    = award.label :title, 'Award title', class: 'form-label'
+    = award.text_field :title, class: 'form-control'
+  div class='mb-3'
+    = award.label :image, class: 'form-label'
+    = award.file_field :image, class: 'form-control'
+  = link_to t('awards.new.remove'), '#', class: 'remove-award-link'

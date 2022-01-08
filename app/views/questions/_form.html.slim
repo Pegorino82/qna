@@ -15,4 +15,9 @@
     .add_link
       = link_to_add_association t('links.new.add'), f, :links, partial: 'links/link_fields'
 
+  #award
+    = f.fields_for :award do |award|
+      = render 'awards/award_fields', award: award
+    = link_to t('awards.new.add'), '#', class: 'add-award-link'
+
   p= f.submit submit_text, class: 'btn btn-light border mb-3'
