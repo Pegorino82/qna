@@ -2,8 +2,9 @@ document.addEventListener('turbolinks:load', () => {
 
     document.querySelector('.question .votes')
         .addEventListener('ajax:success', (event) => {
-        document.querySelector('.question .votes')
-            .innerHTML = event.detail[2].responseText
+            const votes = document.querySelector('.question .votes');
+            const vote = event.detail[0]
+            votes.querySelector('.vote-count').textContent = vote.vote_count;
     })
 
     document.querySelector('.question .votes')

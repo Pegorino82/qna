@@ -27,7 +27,8 @@ module Voted
   def create_vote(value)
     @vote = @votable.votes.build(author: current_user, value: value)
     if @vote.save
-      render_html
+      # render_html
+      render_json
     else
       render_errors
     end
@@ -40,7 +41,8 @@ module Voted
       @vote.send(action)
     end
 
-    render_html
+    # render_html
+    render_json
   end
 
   def model_klass
@@ -61,11 +63,26 @@ module Voted
     end
   end
 
+  def render_json
+    respond_to do |format|
+      format.json do
+        render json: {
+          vote_value: @vote.value,
+          votable_id: @votable.id,
+          votable_class: @votable.class.name.underscore,
+          vote_count: @votable.vote_count
+        }
+      end
+    end
+  end
+
   def render_errors
     respond_to do |format|
       format.html { render partial: 'shared/errors',
                            locals: { resource: @votable },
-                           status: :unprocessable_entity}
+                           status: :unprocessable_entity }
+
+      format.json { render json: @votable.errors.full_messages, status: :unprocessable_entity }
     end
   end
 end
