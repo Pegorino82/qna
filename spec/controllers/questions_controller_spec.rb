@@ -2,7 +2,95 @@
 
 require 'rails_helper'
 
+shared_examples 'voted' do
+  let(:user) { create :user }
+  let(:votable_author) { create :user }
+  let(:votable) { create(described_class.controller_name.singularize.underscore.to_sym, author: votable_author) }
+
+  describe 'POST #like', js: true do
+    context 'Authenticated user' do
+      before { login(user) }
+
+      it "increments #{described_class.controller_name.to_s}'s vote" do
+        post :like, params: { id: votable }, format: :html
+        expect(votable.vote_count).to eq 1
+      end
+
+      it "can't increments #{described_class.controller_name.to_s}'s vote twice" do
+        post :like, params: { id: votable }, format: :html
+        post :like, params: { id: votable }, format: :html
+        expect(votable.vote_count).to eq 1
+      end
+
+      it "can cancel #{described_class.controller_name.to_s}'s like" do
+        post :like, params: { id: votable }, format: :html
+        post :dislike, params: { id: votable }, format: :html
+        expect(votable.vote_count).to eq 0
+      end
+    end
+
+    context "vote his #{described_class.controller_name.to_s}" do
+      before { login(votable_author) }
+
+      it "can't increments #{described_class.controller_name.to_s}'s vote" do
+        post :like, params: { id: votable }, format: :html
+        expect(votable.vote_count).to eq 0
+        expect(response.status).to eq 422
+      end
+    end
+
+    context 'Unauthenticated user' do
+      it "can't vote #{described_class.controller_name.to_s}" do
+        post :like, params: { id: votable }, format: :html
+        expect(votable.vote_count).to eq 0
+      end
+    end
+  end
+
+  describe 'POST #dislike' do
+    context 'Authenticated user' do
+      before { login(user) }
+
+      it "decrements #{described_class.controller_name.to_s}'s vote" do
+        post :dislike, params: { id: votable }, format: :html
+        expect(votable.vote_count).to eq -1
+      end
+
+      it "can't decrements #{described_class.controller_name.to_s}'s vote twice" do
+        post :dislike, params: { id: votable }, format: :html
+        post :dislike, params: { id: votable }, format: :html
+        expect(votable.vote_count).to eq -1
+      end
+
+      it "can cancel #{described_class.controller_name.to_s}'s like" do
+        post :dislike, params: { id: votable }, format: :html
+        post :like, params: { id: votable }, format: :html
+        expect(votable.vote_count).to eq 0
+      end
+    end
+
+    context "vote his #{described_class.controller_name.to_s}" do
+      before { login(votable_author) }
+
+      it "can't decrements #{described_class.controller_name.to_s}'s vote" do
+        post :dislike, params: { id: votable }, format: :html
+        expect(votable.vote_count).to eq 0
+        expect(response.status).to eq 422
+      end
+    end
+
+    context 'Unauthenticated user' do
+      it "can't vote #{described_class.controller_name.to_s}" do
+        post :dislike, params: { id: votable }, format: :html
+        expect(votable.vote_count).to eq 0
+      end
+    end
+  end
+end
+
 RSpec.describe QuestionsController, type: :controller do
+  it_behaves_like 'voted'
+
   let(:user) { create :user }
   let(:question) { create :question, author: user }
 

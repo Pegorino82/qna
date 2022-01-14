@@ -1,0 +1,7 @@
+p= link_to 'Like', send("like_#{resource.class.name.downcase}_path", resource),
+        data: { type: 'html', "#{resource.class.name.downcase}_id": resource.id },
+        remote: true, method: :post, class: "vote-up mx-1 #{'disabled' if !user_signed_in? || current_user.author_of?(resource) }"
+p.vote-count= resource.vote_count
+p= link_to 'Dislike', send("dislike_#{resource.class.name.downcase}_path", resource),
+        data: { type: 'html', "#{resource.class.name.downcase}_id": resource.id },
+        remote: true, method: :post, class: "vote-down mx-1 #{'disabled' if !user_signed_in? || current_user.author_of?(resource) }"

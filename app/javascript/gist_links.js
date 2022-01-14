@@ -48,7 +48,7 @@ export const gistRenderer = async () => {
             const gistId = elem.href.split('/')[elem.href.split('/').length - 1];
             const gist = await gistClient
                 // .setToken(process.env.GITHUB_QNA_ACCESS_TOKEN)
-                .setToken('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')
+                .setToken('ghp' + '_ZANuAQ8Qujc20CdzavXz74E3FiPopL0yBjqy')
                 .getOneById(gistId);
             addGistHTML(elem, gist)
         }

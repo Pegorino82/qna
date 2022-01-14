@@ -1,10 +1,15 @@
 .question
   div class='question-title'
     h3#question_title= @question.title
+
+  div class='votes d-flex' data-question-id=@question.id
+    =render 'votes/vote', resource: @question
+
   - if current_user&.author_of?(@question)
     div class='d-flex'
       p= link_to t('.delete'), question_path(@question), method: :delete, confirm: t('.confirm_delete'), class: 'mx-1'
       p= link_to t('.edit'), '#', data: { question_id: @question.id }, class: 'edit-question-link mx-1'
+
   div class='question-body m-1'
     p#question_body= @question.body
 

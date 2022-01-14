@@ -2,6 +2,7 @@ div class='question-item card mb-3'
   div class='row g-0'
     div class='col-md-2 border-end'
       p class="m-2" ="Answers: #{question.answers.count}"
+      p class="m-2" ="Votes: #{question.vote_count}"
     div class='col-md-10'
       div class='card-body'
         h5 class='question-title card-title' =link_to question.title, question_path(question)

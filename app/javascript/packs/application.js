@@ -13,6 +13,7 @@ import '../answers'
 import '../questions'
 import '../awards'
 import '../gist_links'
+import '../votes'
 
 Rails.start()
 Turbolinks.start()
