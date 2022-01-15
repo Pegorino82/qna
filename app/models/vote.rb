@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Vote < ApplicationRecord
   belongs_to :author, class_name: 'User'
   belongs_to :votable, polymorphic: true
@@ -6,13 +8,13 @@ class Vote < ApplicationRecord
   validate :author_validation
 
   def like
-    self.update(value: 1) if self.value == 0
-    self.update(value: 0) if self.value == -1
+    update(value: 1) if value.zero?
+    update(value: 0) if value == -1
   end
 
   def dislike
-    self.update(value: -1) if self.value == 0
-    self.update(value: 0) if self.value == 1
+    update(value: -1) if value.zero?
+    update(value: 0) if value == 1
   end
 
   private

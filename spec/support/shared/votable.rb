@@ -20,7 +20,7 @@ shared_examples_for 'votable' do
 
       it 'down vote count' do
         vote.dislike
-        expect(votable.vote_count).to eq -1
+        expect(votable.vote_count).to eq(-1)
       end
     end
   end

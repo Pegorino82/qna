@@ -12,9 +12,9 @@ shared_examples 'voted' do
       before { login(user) }
 
       context 'vote once' do
-        before { post :like, params: { id: votable }, format: :json}
+        before { post :like, params: { id: votable }, format: :json }
 
-        it "increments #{described_class.controller_name.to_s}'s vote" do
+        it "increments #{described_class.controller_name}'s vote" do
           expect(votable.vote_count).to eq 1
         end
 
@@ -35,7 +35,7 @@ shared_examples 'voted' do
           post :like, params: { id: votable }, format: :json
         end
 
-        it "can't increments #{described_class.controller_name.to_s}'s vote twice" do
+        it "can't increments #{described_class.controller_name}'s vote twice" do
           expect(votable.vote_count).to eq 1
         end
 
@@ -56,7 +56,7 @@ shared_examples 'voted' do
           post :dislike, params: { id: votable }, format: :json
         end
 
-        it "can cancel #{described_class.controller_name.to_s}'s like" do
+        it "can cancel #{described_class.controller_name}'s like" do
           expect(votable.vote_count).to eq 0
         end
 
@@ -72,10 +72,10 @@ shared_examples 'voted' do
       end
     end
 
-    context "vote his #{described_class.controller_name.to_s}" do
+    context "vote his #{described_class.controller_name}" do
       before { login(votable_author) }
 
-      it "can't increments #{described_class.controller_name.to_s}'s vote" do
+      it "can't increments #{described_class.controller_name}'s vote" do
         post :like, params: { id: votable }, format: :json
         expect(votable.vote_count).to eq 0
         expect(response.status).to eq 422
@@ -83,7 +83,7 @@ shared_examples 'voted' do
     end
 
     context 'Unauthenticated user' do
-      it "can't vote #{described_class.controller_name.to_s}" do
+      it "can't vote #{described_class.controller_name}" do
         post :like, params: { id: votable }, format: :json
         expect(votable.vote_count).to eq 0
       end
@@ -95,10 +95,10 @@ shared_examples 'voted' do
       before { login(user) }
 
       context 'votes once' do
-        before {  post :dislike, params: { id: votable }, format: :json }
+        before { post :dislike, params: { id: votable }, format: :json }
 
-        it "decrements #{described_class.controller_name.to_s}'s vote" do
-          expect(votable.vote_count).to eq -1
+        it "decrements #{described_class.controller_name}'s vote" do
+          expect(votable.vote_count).to eq(-1)
         end
 
         it 'responds json' do
@@ -118,8 +118,8 @@ shared_examples 'voted' do
           post :dislike, params: { id: votable }, format: :json
         end
 
-        it "can't decrements #{described_class.controller_name.to_s}'s vote twice" do
-          expect(votable.vote_count).to eq -1
+        it "can't decrements #{described_class.controller_name}'s vote twice" do
+          expect(votable.vote_count).to eq(-1)
         end
 
         it 'responds json' do
@@ -139,7 +139,7 @@ shared_examples 'voted' do
           post :like, params: { id: votable }, format: :json
         end
 
-        it "can cancel #{described_class.controller_name.to_s}'s like" do
+        it "can cancel #{described_class.controller_name}'s like" do
           expect(votable.vote_count).to eq 0
         end
 
@@ -155,10 +155,10 @@ shared_examples 'voted' do
       end
     end
 
-    context "vote his #{described_class.controller_name.to_s}" do
+    context "vote his #{described_class.controller_name}" do
       before { login(votable_author) }
 
-      it "can't decrements #{described_class.controller_name.to_s}'s vote" do
+      it "can't decrements #{described_class.controller_name}'s vote" do
         post :dislike, params: { id: votable }, format: :json
         expect(votable.vote_count).to eq 0
         expect(response.status).to eq 422
@@ -166,7 +166,7 @@ shared_examples 'voted' do
     end
 
     context 'Unauthenticated user' do
-      it "can't vote #{described_class.controller_name.to_s}" do
+      it "can't vote #{described_class.controller_name}" do
         post :dislike, params: { id: votable }, format: :json
         expect(votable.vote_count).to eq 0
       end

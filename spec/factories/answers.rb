@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :answer do
-    body { "Test Answer" }
+    body { 'Test Answer' }
     correct { false }
     question
     author { create :user }

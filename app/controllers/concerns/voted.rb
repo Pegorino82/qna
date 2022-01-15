@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Voted
   extend ActiveSupport::Concern
 
@@ -78,9 +80,11 @@ module Voted
 
   def render_errors
     respond_to do |format|
-      format.html { render partial: 'shared/errors',
-                           locals: { resource: @votable },
-                           status: :unprocessable_entity }
+      format.html do
+        render partial: 'shared/errors',
+               locals: { resource: @votable },
+               status: :unprocessable_entity
+      end
 
       format.json { render json: @votable.errors.full_messages, status: :unprocessable_entity }
     end
