@@ -100,7 +100,7 @@ feature 'Authenticated user can edit his question', "
         file = fixture_file_upload("#{Rails.root}/spec/rails_helper.rb", 'text/plain')
         other_question.files.attach(file)
 
-        within '.question > #question_files' do
+        within '.question div#question_files' do
           expect(page).to_not have_link I18n.t('files.destroy.delete')
         end
       end
@@ -109,7 +109,7 @@ feature 'Authenticated user can edit his question', "
         create :link, linkable: other_question
         visit question_path(other_question)
 
-        within '.question > #question_links' do
+        within '.question div#question_links' do
           expect(page).to_not have_link I18n.t('links.destroy.delete')
         end
       end
@@ -124,13 +124,13 @@ feature 'Authenticated user can edit his question', "
     end
 
     scenario 'can not delete file' do
-      within '.question > #question_files' do
+      within '.question div#question_files' do
         expect(page).to_not have_link I18n.t('files.destroy.delete')
       end
     end
 
     scenario 'can not delete link' do
-      within '.question > #question_links' do
+      within '.question div#question_links' do
         expect(page).to_not have_link I18n.t('links.destroy.delete')
       end
     end

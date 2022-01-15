@@ -1,25 +1,28 @@
 - if answer.persisted?
   li id="answer-#{answer.id}" class=answer_class
-    .mt-2
-      p= "#{answer.body} (#{answer.author.email})"
-      div id="answer_#{answer.id}_files"
-        = render 'shared/files', resource: answer
-      div id="answer_#{answer.id}_links"
-        = render 'shared/links', resource: answer
-      div class='d-flex'
-        - if current_user&.author_of?(answer.question)
-          p= link_to t('questions.show.mark_best_answer'),
-                  best_answer_answer_path(answer),
-                  method: :patch,
-                  remote: true,
-                  class: 'best-answer-link mx-1',
-                  data: { best_answer: answer.id }
-        - if current_user&.author_of?(answer)
-          p= link_to t('questions.show.delete_answer'), answer_path(answer), method: :delete, remote: true, class: 'mx-1'
-          p= link_to t('questions.show.edit_answer'), '#', class: 'edit-answer-link mx-1', data: { answer_id: answer.id }
+    div class="row mt-2"
+      div class='col-md-2 border-end'
+        = render 'votes/vote', resource: answer
+      div class='col-md-10'
+        p= "#{answer.body} (#{answer.author.email})"
+        div id="answer_#{answer.id}_files"
+          = render 'shared/files', resource: answer
+        div id="answer_#{answer.id}_links"
+          = render 'shared/links', resource: answer
+        div class='d-flex'
+          - if current_user&.author_of?(answer.question)
+            p= link_to t('questions.show.mark_best_answer'),
+                    best_answer_answer_path(answer),
+                    method: :patch,
+                    remote: true,
+                    class: 'best-answer-link mx-1',
+                    data: { best_answer: answer.id }
+          - if current_user&.author_of?(answer)
+            p= link_to t('questions.show.delete_answer'), answer_path(answer), method: :delete, remote: true, class: 'mx-1'
+            p= link_to t('questions.show.edit_answer'), '#', class: 'edit-answer-link mx-1', data: { answer_id: answer.id }
 
-      div class="answer_errors_#{answer.id}"
-        = render 'shared/errors', resource: answer
+        div class="answer_errors_#{answer.id}"
+          = render 'shared/errors', resource: answer
 
-      = render 'answers/form', answer: answer
+        = render 'answers/form', answer: answer
 

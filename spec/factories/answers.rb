@@ -2,8 +2,8 @@ FactoryBot.define do
   factory :answer do
     body { "Test Answer" }
     correct { false }
-    question { nil }
-    author { nil }
+    question
+    author { create :user }
 
     trait :invalid do
       body { nil }
