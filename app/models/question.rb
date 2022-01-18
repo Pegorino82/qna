@@ -15,6 +15,8 @@ class Question < ApplicationRecord
 
   validates :title, :body, presence: true
 
+  scope :new_on_top, -> { order(created_at: :desc) }
+
   def answers_without_best
     answers.where.not(id: best_answer_id)
   end

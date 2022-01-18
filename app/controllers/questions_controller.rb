@@ -6,8 +6,10 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :find_question, only: %i[show edit update destroy]
 
+  after_action :publish_question, only: %i[create]
+
   def index
-    @questions = Question.all
+    @questions = Question.new_on_top.all
   end
 
   def show
@@ -58,5 +60,16 @@ class QuestionsController < ApplicationController
                                      files: [],
                                      links_attributes: %i[title url],
                                      award_attributes: %i[title image])
+  end
+
+  def publish_question
+    return if @question.errors.any?
+    ActionCable.server.broadcast(
+      'questions',
+      ApplicationController.render(
+        partial: 'questions/question',
+        locals: { question: @question }
+      )
+    )
   end
 end
