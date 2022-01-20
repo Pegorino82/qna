@@ -7,6 +7,8 @@ class AnswersController < ApplicationController
   before_action :find_question, only: %i[create]
   before_action :find_answer, only: %i[update destroy best_answer]
 
+  after_action :publish_answer, only: %i[create update]
+
   def create
     @answer = @question.answers.build(answer_params)
     @answer.author = current_user
@@ -42,5 +44,23 @@ class AnswersController < ApplicationController
 
   def answer_params
     params.require(:answer).permit(:body, :correct, files: [], links_attributes: %i[title url])
+  end
+
+  def publish_answer
+    return if @answer.errors.any?
+
+    gon.push({
+               answer_owner: @answer.author.id,
+               question_owner: @question.author.id
+             })
+
+    ActionCable.server.broadcast("question_#{@answer.question.id}_answers", @answer.as_json)
+    # ActionCable.server.broadcast(
+    #   "question_#{@answer.question.id}_answers",
+    #   ApplicationController.render(
+    #     partial: 'answers/answer',
+    #     locals: { answer: @answer, answer_class: '' }
+    #   )
+    # )
   end
 end
