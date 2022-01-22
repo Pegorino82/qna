@@ -49,17 +49,34 @@ class AnswersController < ApplicationController
   def publish_answer
     return if @answer.errors.any?
 
-    gon.push({
-               answer_owner: @answer.author.id,
-               question_owner: @question.author.id
-             })
-
     ActionCable.server.broadcast(
       "question_#{@answer.question.id}_answers",
       {
         answer: @answer.as_json,
+        files: files,
+        links: links,
         author: @answer.author.as_json,
-        vote_count: @answer.vote_count
+        vote_count: @answer.vote_count,
       }.as_json)
+  end
+
+  def files
+    @answer.files.map do |file|
+      {
+        id: file.id,
+        path: url_for(file),
+        name: file.filename
+      }
+    end.as_json
+  end
+
+  def links
+    @answer.links.map do |link|
+      {
+        id: link.id,
+        path: url_for(link.url),
+        name: link.title
+      }
+    end.as_json
   end
 end

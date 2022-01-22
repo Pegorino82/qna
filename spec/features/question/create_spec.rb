@@ -43,33 +43,33 @@ feature 'User can create question', "
       expect(page).to have_link 'rails_helper.rb'
       expect(page).to have_link 'spec_helper.rb'
     end
+  end
 
-    context 'multiple sessions', js: true do
-      scenario "question appears on other user's page" do
-        Capybara.using_session('user') do
-          sign_in(user)
-          visit questions_path
-        end
+  context 'multiple sessions', js: true do
+    scenario "question appears on other user's page" do
+      Capybara.using_session('user') do
+        sign_in(user)
+        visit questions_path
+      end
 
-        Capybara.using_session('guest') do
-          visit questions_path
-        end
+      Capybara.using_session('guest') do
+        visit questions_path
+      end
 
-        Capybara.using_session('user') do
-          click_on I18n.t('questions.index.ask')
+      Capybara.using_session('user') do
+        click_on I18n.t('questions.index.ask')
 
-          fill_in 'Title', with: 'Test question'
-          fill_in 'Body', with: 'text'
-          click_on I18n.t('questions.new.ask')
+        fill_in 'Title', with: 'Test question'
+        fill_in 'Body', with: 'text'
+        click_on I18n.t('questions.new.ask')
 
-          expect(page).to have_content I18n.t('questions.create.success')
-          expect(page).to have_content 'Test question'
-          expect(page).to have_content 'text'
-        end
+        expect(page).to have_content I18n.t('questions.create.success')
+        expect(page).to have_content 'Test question'
+        expect(page).to have_content 'text'
+      end
 
-        Capybara.using_session('guest') do
-          expect(page).to have_content 'Test question'
-        end
+      Capybara.using_session('guest') do
+        expect(page).to have_content 'Test question'
       end
     end
   end

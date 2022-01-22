@@ -100,10 +100,6 @@ GEM
       xpath (~> 3.2)
     childprocess (4.1.0)
     cocoon (1.2.15)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     debug (1.4.0)
@@ -249,11 +245,6 @@ GEM
     semantic_range (3.0.0)
     shoulda-matchers (5.0.0)
       activesupport (>= 5.2.0)
-    skim (0.11.0)
-      coffee-script
-      coffee-script-source (>= 1.2.0)
-      slim (>= 3.0)
-      sprockets (>= 2.0, < 5.0)
     slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
@@ -325,7 +316,6 @@ DEPENDENCIES
   sassc-rails
   selenium-webdriver
   shoulda-matchers (~> 5.0)
-  skim
   slim-rails
   turbolinks (~> 5)
   tzinfo-data

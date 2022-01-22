@@ -1,4 +1,9 @@
 module.exports = {
     test: /\.hbs$/,
-    loader: 'handlebars-loader'
+    loader: 'handlebars-loader',
+    options: {
+        precompileOptions: {
+            knownHelpersOnly: false,
+        }
+    }
 }
