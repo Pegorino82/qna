@@ -1,3 +1,4 @@
+import JsonpTemplatePlugin from 'webpack/lib/web/JsonpTemplatePlugin';
 import consumer from './consumer';
 
 
@@ -15,14 +16,21 @@ consumer.subscriptions.create('AnswersChannel', {
         console.log(JSON.stringify(data));
         console.log(gon.current_user_id);
         console.log(gon.question_id);
-        if (data.author_id === gon.current_user_id) {
+        if (data.answer.author_id === gon.current_user_id) {
             return
         }
-        if (!location.pathname.endsWith(gon.question_id)) {
+        if (!location.pathname.endsWith(data.answer.question_id)) {
             return
         }
+        data.disabled_vote = data.answer.author_id === gon.current_user_id
+        const answer = require('templates/answer.hbs')(data);
+        console.log(answer);
 
-        // document.querySelector(`.answers #answer-${data.id} .answer-body`)
-        //     .textContent = data.body
+
+        document.querySelector(`.answers`)
+            .insertAdjacentHTML('beforeend', answer)
+
+        const votesEvent = new Event('votesEvent')
+        document.dispatchEvent(votesEvent)
     }
 })

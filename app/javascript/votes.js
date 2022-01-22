@@ -1,4 +1,4 @@
-document.addEventListener('turbolinks:load', () => {
+const votes = () => {
     const votesNodeList = document.querySelectorAll('.votes');
     if (votesNodeList.length) {
         votesNodeList.forEach(voteElement => {
@@ -19,4 +19,12 @@ document.addEventListener('turbolinks:load', () => {
             })
         })
     }
+}
+
+document.addEventListener('turbolinks:load', () => {
+    votes()
+})
+
+document.addEventListener('votesEvent', () => {
+    votes()
 })

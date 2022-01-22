@@ -51,6 +51,7 @@ gem 'bootstrap', '~> 5.1.3'
 gem 'popper_js', '~> 2.9.3'
 gem 'jquery-rails'
 gem 'cocoon'
+gem 'gon'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

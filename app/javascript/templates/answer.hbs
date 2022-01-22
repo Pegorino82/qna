@@ -1,0 +1,46 @@
+<li id="answer-{{answer.id}}">
+    <div class="row mt-2">
+        <div class='col-md-2 border-end'>
+            <div class='votes center' data-resource-id={{answer.id}} data-resource-name='answer'>
+                {{disabled_vote}}
+                <p class='mb-0'>
+                    <a data-type="json" 
+                    data-answer-id="{{answer.id}}" 
+                    class="vote-up mx-1 {{#if disabled_vote }}disabled{{/if}}" 
+                    data-remote="true" 
+                    rel="nofollow" 
+                    data-method="post" 
+                    href="/answers/{{answer.id}}/like">
+                    <svg class="bi bi-caret-up" fill="currentColor" height="24" viewBox="0 0 16 16" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z"></path></svg>
+                    </a>
+                </p>
+                <p class='vote-count mb-0'>
+                    {{vote_count}}
+                </p>
+                <p class='mb-0'>
+                    <a data-type="json" 
+                    data-answer-id="{{answer.id}}" 
+                    class="vote-down mx-1 {{#if disabled_vote }}disabled{{/if}}" 
+                    data-remote="true" 
+                    rel="nofollow" 
+                    data-method="post" 
+                    href="/answers/{{answer.id}}/dislike">
+                    <svg class="bi bi-caret-down" fill="currentColor" height="24" viewBox="0 0 16 16" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"></path></svg>
+                    </a>
+                </p>
+            </div>
+        </div> 
+        <div class='col-md-10'>
+            <p class='answer-body'>{{ answer.body }}</p>
+            <p class='answer-author'>{{ author.email }}</p>
+            <div id="answer_{{answer.id}}_files">
+
+            </div>
+            <div id="answer_{{answer.id}}_links">
+
+            </div>
+            <div class='d-flex'>
+            </div>
+        </div>     
+    </div>
+</li>
