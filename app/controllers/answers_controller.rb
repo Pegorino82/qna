@@ -7,7 +7,7 @@ class AnswersController < ApplicationController
   before_action :find_question, only: %i[create]
   before_action :find_answer, only: %i[update destroy best_answer]
 
-  after_action :publish_answer, only: %i[create update]
+  after_action :publish_answer, only: %i[create]
 
   def create
     @answer = @question.answers.build(answer_params)

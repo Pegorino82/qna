@@ -1,4 +1,4 @@
-div class="question row"
+div class="question row" id="question-#{@question.id}"
 
   div class='col-md-2 border-end'
     = render 'votes/vote', resource: @question
@@ -21,8 +21,9 @@ div class="question row"
     #question_links
       =render 'shared/links', resource: @question
 
-    .question_errors
-      = render 'shared/errors', resource: @question
+    hr
+    #question_comments class="ml-2"
+      =render 'shared/comments', resource: @question
 
     = render 'form', form_local: false, form_class: 'hidden', submit_text: t('questions.edit.submit')
 

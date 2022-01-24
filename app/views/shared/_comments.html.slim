@@ -1,0 +1,6 @@
+.comments
+  - if resource.comments.present?
+    - resource.comments.each do |comment|
+      =render 'comments/comment', comment: comment
+- if user_signed_in?
+  =render 'comments/form', resource: resource

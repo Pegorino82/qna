@@ -69,3 +69,8 @@ en:
     new:
       add: 'Add award'
       remove: 'Remove award'
+  comments:
+    new:
+      create: 'Add comment'
+    destroy:
+      delete: 'Delete'

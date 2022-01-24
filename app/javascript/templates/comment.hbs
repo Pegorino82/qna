@@ -1,0 +1,21 @@
+<div id="comment_id_{{comment.id}}" class='content-align-between'>
+    <div class="comment-body">
+        {{comment.body}}
+    </div>
+    <div class="comment-author">
+        by: {{author.email}}
+    </div>
+    {{#if (author_of? comment.author_id)}}
+        <p>
+            <a href="/comments/{{comment.id}}"
+               class="mx-1 border"
+               data-remote="true"
+               rel="nofollow"
+               data-method="delete">
+                Delete
+            </a>
+        </p>
+    {{/if}}
+    <hr>
+</div>
+

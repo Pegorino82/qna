@@ -25,5 +25,9 @@
         div class="answer_errors_#{answer.id}"
           = render 'shared/errors', resource: answer
 
+        hr
+        div id="answer_#{answer.id}_comments" class="ml-2"
+          = render 'shared/comments', resource: answer
+
         = render 'answers/form', answer: answer
 

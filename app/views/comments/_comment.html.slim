@@ -1,0 +1,10 @@
+div id="comment_id_#{comment.id}" class='content-align-between'
+  .comment-body =comment.body
+  .comment-author ="by: #{comment.author.email}"
+  - if current_user&.author_of?(comment)
+    p= link_to t('comments.destroy.delete'),
+            comment_path(comment),
+            method: :delete,
+            remote: true,
+            class: 'mx-1 border'
+  hr

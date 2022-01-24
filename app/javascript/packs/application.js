@@ -14,6 +14,7 @@ import '../questions'
 import '../awards'
 import '../gist_links'
 import '../votes'
+import '../comments'
 import '../helpers/handlebars'
 
 Rails.start()
