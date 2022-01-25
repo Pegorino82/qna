@@ -1,4 +1,4 @@
-= form_with model: @question, local: form_local, class: form_class do |f|
+= form_with model: @question, local: form_local, class: form_class, id: "question-form" do |f|
   div class='mb-3'
     = f.label :title, class: 'form-label'
     = f.text_field :title, class: 'form-control'

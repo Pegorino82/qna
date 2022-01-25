@@ -19,18 +19,20 @@ feature 'Authenticated user can edit his answer', "
       background do
         visit question_path(question)
 
-        click_on I18n.t('questions.show.edit_answer')
+        within '.answers' do
+          click_on I18n.t('questions.show.edit_answer')
+        end
       end
 
       scenario 'edit his answer' do
         within '.answers' do
           # to be sure we are looking for answer in answers
-          fill_in 'Body', with: 'Edited answer'
+          fill_in 'answer[body]', with: 'Edited answer'
           click_button I18n.t('answers.edit.submit')
 
           expect(page).to_not have_content answer.body
           expect(page).to have_content 'Edited answer'
-          expect(page).to_not have_selector 'textarea'
+          expect(page).to_not have_selector 'textarea#answer_body'
         end
       end
 

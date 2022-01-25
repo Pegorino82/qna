@@ -29,7 +29,7 @@ feature 'Authenticated user can edit his question', "
 
           expect(page).to_not have_content question.title
           expect(page).to_not have_content question.body
-          expect(page).to_not have_selector 'textarea'
+          expect(page).to_not have_selector 'textarea#question_body'
         end
       end
 

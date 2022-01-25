@@ -8,7 +8,8 @@ document.addEventListener('turbolinks:load', () => {
                 question.querySelectorAll('form #links .nested-fields').forEach(elem => {
                     elem.parentNode.removeChild(elem)
                 });
-                question.querySelector('form').classList.toggle('hidden')
+                console.log(question.querySelector('form'))
+                question.querySelector('#question-form').classList.toggle('hidden')
             }
         })
     }

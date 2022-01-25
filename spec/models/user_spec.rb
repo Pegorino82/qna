@@ -6,6 +6,7 @@ RSpec.describe User, type: :model do
   it { should have_many(:questions).class_name('Question') }
   it { should have_many(:answers).class_name('Answer') }
   it { should have_many(:votes).class_name('Vote') }
+  it { should have_many(:comments).class_name('Comment') }
   it { should have_many(:awards) }
 
   let(:user) { create :user }

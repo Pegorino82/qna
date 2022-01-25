@@ -8,12 +8,12 @@ feature 'Authenticated user can delete his question', "
   I'd like to be able to delete the question i created
 " do
   given!(:user) { create :user }
-  given(:question) { create :question, author: user }
+  given!(:question) { create :question, author: user }
 
   context 'Authenticated user as author' do
     background { sign_in(user) }
 
-    scenario 'can delete his question' do
+    scenario 'can delete his question', js: true do
       visit question_path(question)
 
       click_on I18n.t('questions.show.delete')

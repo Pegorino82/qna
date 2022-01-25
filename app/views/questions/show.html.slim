@@ -25,6 +25,9 @@ div class="question row" id="question-#{@question.id}"
     #question_comments class="ml-2"
       =render 'shared/comments', resource: @question
 
+    .question_errors
+      = render 'shared/errors', resource: @question
+
     = render 'form', form_local: false, form_class: 'hidden', submit_text: t('questions.edit.submit')
 
 hr
