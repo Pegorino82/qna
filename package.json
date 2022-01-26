@@ -3,12 +3,12 @@
   "private": true,
   "dependencies": {
     "@nathanvda/cocoon": "^1.2.14",
+    "@octokit/rest": "^18.12.0",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "^5.4.3",
     "dotenv": "^10.0.0",
-    "gist-client": "^1.1.1",
     "handlebars": "^4.7.6",
     "handlebars-helpers": "^0.10.0",
     "handlebars-loader": "^1.7.1",

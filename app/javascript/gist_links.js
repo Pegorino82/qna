@@ -1,7 +1,7 @@
-const GistClient = require("gist-client");
-const gistClient = new GistClient();
-// const env = require('dotenv').config();
-// console.log(process.env.GITHUB_QNA_ACCESS_TOKEN)
+const { Octokit } = require("@octokit/rest")
+const gistClient = new Octokit({
+    baseUrl: 'https://api.github.com'
+});
 
 const isGist = (link) => {
     return link.href && link.href.startsWith('https://gist.github.com')
@@ -12,12 +12,12 @@ const gistHTML = (gist, gistLinkName) => {
 
     const gistLink = document.createElement('a');
     gistLink.innerText = gistLinkName;
-    gistLink.href = gist.html_url;
+    gistLink.href = gist.data.html_url;
     gistLink.target = '_blank';
 
     root.insertAdjacentElement('afterbegin', gistLink);
 
-    for (const file of Object.values(gist.files)) {
+    for (const file of Object.values(gist.data.files)) {
         const inner = document.createElement('div');
         inner.classList.add('border');
         inner.classList.add('mt-1');
@@ -45,11 +45,10 @@ const addGistHTML = (elem, gist) => {
 export const gistRenderer = async () => {
     for (const elem of document.querySelectorAll('.resource-link')) {
         if (isGist(elem)) {
-            const gistId = elem.href.split('/')[elem.href.split('/').length - 1];
-            const gist = await gistClient
-                // .setToken(process.env.GITHUB_QNA_ACCESS_TOKEN)
-                .setToken('ghp' + '_ZANuAQ8Qujc20CdzavXz74E3FiPopL0yBjqy')
-                .getOneById(gistId);
+            const gist_id = elem.href.split('/')[elem.href.split('/').length - 1];
+            const gist = await gistClient.gists.get({
+                gist_id,
+            });
             addGistHTML(elem, gist)
         }
     }
