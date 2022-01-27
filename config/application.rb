@@ -21,6 +21,8 @@ module Qna
     #
     config.active_storage.replace_on_assign_to_many = false
 
+    config.autoload_paths += [config.root.join('app')]
+
     config.generators do |g|
       g.test_framework :rspec,
                        view_specs: false,
