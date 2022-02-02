@@ -22,5 +22,9 @@ Rails.application.routes.draw do
   resources :awards, only: :index
   resources :comments, only: %i[create destroy]
 
+  resources :authorizations, only: %i[new create] do
+    get 'email_confirmation/:confirmation_token', action: :email_confirmation, as: :email_confirmation
+  end
+
   mount ActionCable.server => '/cable'
 end

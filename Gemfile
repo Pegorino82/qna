@@ -56,6 +56,7 @@ gem 'gon'
 gem 'omniauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-github'
+gem 'omniauth-vkontakte'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -65,6 +66,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rspec-rails', '~> 5.0.0'
   gem 'factory_bot_rails'
+  gem 'letter_opener'
 end
 
 group :development do
@@ -76,11 +78,13 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  #
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
+  gem 'capybara-email'
   gem "selenium-webdriver"
   gem "webdrivers"
   gem 'shoulda-matchers', '~> 5.0'
