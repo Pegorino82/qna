@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
   after_action :publish_delete_comment, only: %i[destroy]
 
   def create
+    authorize Comment
     @comment = Comment.new(comment_params)
     if @comment.save
       render_json
@@ -20,6 +21,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
+    authorize @comment
     @comment_id = @comment.id
     @comment.destroy
 

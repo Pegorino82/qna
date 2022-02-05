@@ -78,7 +78,7 @@ shared_examples 'voted' do
       it "can't increments #{described_class.controller_name}'s vote" do
         post :like, params: { id: votable }, format: :json
         expect(votable.vote_count).to eq 0
-        expect(response.status).to eq 422
+        expect(response.status).to eq 401
       end
     end
 
@@ -161,7 +161,7 @@ shared_examples 'voted' do
       it "can't decrements #{described_class.controller_name}'s vote" do
         post :dislike, params: { id: votable }, format: :json
         expect(votable.vote_count).to eq 0
-        expect(response.status).to eq 422
+        expect(response.status).to eq 401
       end
     end
 

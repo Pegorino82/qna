@@ -37,7 +37,7 @@ RSpec.describe FilesController, type: :controller do
 
           it 'renders destroy' do
             delete :destroy, params: { id: other_question.files.first }, format: :js
-            expect(response).to render_template :destroy
+            expect(response.status).to eq 401
           end
         end
       end
@@ -70,7 +70,7 @@ RSpec.describe FilesController, type: :controller do
 
           it 'renders destroy' do
             delete :destroy, params: { id: other_answer.files.first }, format: :js
-            expect(response).to render_template :destroy
+            expect(response.status).to eq 401
           end
         end
       end

@@ -1,4 +1,7 @@
 en:
+  pundit:
+    not_authorized: "You are not authorized to perform this action."
+
   main_nav:
     sign_in: 'Sign in'
     sign_out: 'Sign out'

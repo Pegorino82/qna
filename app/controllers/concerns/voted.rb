@@ -29,7 +29,6 @@ module Voted
   def create_vote(value)
     @vote = @votable.votes.build(author: current_user, value: value)
     if @vote.save
-      # render_html
       render_json
     else
       render_errors
@@ -43,7 +42,6 @@ module Voted
       @vote.send(action)
     end
 
-    # render_html
     render_json
   end
 
@@ -53,6 +51,7 @@ module Voted
 
   def find_votable
     @votable = model_klass.find(params[:id])
+    authorize @votable, :can_vote?, policy_class: VotePolicy
   end
 
   def find_vote

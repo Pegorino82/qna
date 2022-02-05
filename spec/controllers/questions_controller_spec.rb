@@ -175,9 +175,9 @@ RSpec.describe QuestionsController, type: :controller do
           .to_not change(question.files, :count)
       end
 
-      it 'redirects to question' do
+      it 'redirects to root' do
         delete :destroy, params: { id: other_question }
-        expect(response).to redirect_to other_question
+        expect(response).to redirect_to root_path
       end
     end
   end

@@ -9,15 +9,18 @@ class QuestionsController < ApplicationController
   after_action :publish_question, only: %i[create]
 
   def index
+    authorize Question
     @questions = Question.new_on_top.all
   end
 
   def show
+    authorize @question
     @answer = @question.answers.build
     @answer.links.build
   end
 
   def new
+    authorize Question
     @question = Question.new
     @question.links.build
     @award = Award.new(question: @question)
@@ -26,6 +29,7 @@ class QuestionsController < ApplicationController
   def edit; end
 
   def create
+    authorize Question
     @question = current_user.questions.build(question_params)
 
     if @question.save
@@ -36,10 +40,12 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    @question.update(question_params) if current_user.author_of?(@question)
+    authorize @question
+    @question.update(question_params)
   end
 
   def destroy
+    authorize @question
     if current_user.author_of?(@question)
       @question.destroy
       redirect_to questions_path

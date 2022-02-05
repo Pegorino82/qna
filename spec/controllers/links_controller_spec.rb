@@ -38,7 +38,7 @@ RSpec.describe LinksController, type: :controller do
 
           it 'renders destroy' do
             delete :destroy, params: { id: other_question.links.first }, format: :js
-            expect(response).to render_template :destroy
+            expect(response.status).to eq 401
           end
         end
       end
@@ -68,7 +68,7 @@ RSpec.describe LinksController, type: :controller do
 
           it 'renders destroy' do
             delete :destroy, params: { id: other_answer.links.first }, format: :js
-            expect(response).to render_template :destroy
+            expect(response.status).to eq 401
           end
         end
       end

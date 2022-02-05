@@ -57,7 +57,7 @@ RSpec.describe AnswersController, type: :controller do
     end
   end
 
-  describe 'DELETE #destroy' do
+  describe 'DELETE #destroy', js: true do
     before { login(user) }
 
     context 'user is author' do
@@ -86,12 +86,12 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'renders destroy template' do
         delete :destroy, params: { id: other_answer }, format: :js
-        expect(response).to render_template :destroy
+        expect(response.status).to eq 401
       end
     end
   end
 
-  describe 'PATCH #update' do
+  describe 'PATCH #update', js: true do
     before { login(user) }
 
     let!(:answer) { create :answer, question: question, author: user }
@@ -142,12 +142,13 @@ RSpec.describe AnswersController, type: :controller do
                 format: :js
         end.to_not change(other_answer, :body)
       end
+
       it 'redirects to question' do
         patch :update,
               params: { id: other_answer, answer: { body: 'Updated body' } },
               format: :js
 
-        expect(response.status).to render_template :update
+        expect(response.status).to eq 401
       end
     end
   end

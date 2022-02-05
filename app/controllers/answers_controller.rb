@@ -10,16 +10,19 @@ class AnswersController < ApplicationController
   after_action :publish_answer, only: %i[create]
 
   def create
+    authorize Answer
     @answer = @question.answers.build(answer_params)
     @answer.author = current_user
     @answer.save
   end
 
   def update
-    @answer.update(answer_params) if current_user.author_of?(@answer)
+    authorize @answer
+    @answer.update(answer_params)
   end
 
   def destroy
+    authorize @answer
     if current_user.author_of?(@answer)
       @answer.destroy
       flash.now[:notice] = t('.success')
@@ -29,6 +32,7 @@ class AnswersController < ApplicationController
   end
 
   def best_answer
+    authorize @answer
     @answer.mark_as_best if current_user.author_of?(@answer.question)
   end
 
