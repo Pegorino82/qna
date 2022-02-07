@@ -7,19 +7,19 @@ shared_examples_for 'API nestable' do
 
   describe 'files' do
     it 'returns list of files' do
-      expect(resource_response['files'].size).to eq files.size
+      expect(resource_response['files'].size).to eq files.size unless skipped_params&.include? 'files'
     end
   end
 
   describe 'comments' do
     it 'returns list of comments' do
-      expect(resource_response['comments'].size).to eq comments.size
+      expect(resource_response['comments'].size).to eq comments.size unless skipped_params&.include? 'comments'
     end
 
     it 'returns all public fields' do
       comments_public_fields.each do |attr|
         expect(resource_response['comments'].first[attr]).to eq resource.comments.first.send(attr).as_json
-      end
+      end unless skipped_params&.include? 'comments'
     end
   end
 

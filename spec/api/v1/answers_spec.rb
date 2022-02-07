@@ -34,6 +34,7 @@ describe 'Answers API', type: :request do
       end
 
       it_behaves_like 'API nestable' do
+        let(:skipped_params) { %w[] }
         let(:comments_public_fields) { %w[id body author_id created_at updated_at] }
         let(:links_public_fields) { %w[id title url created_at updated_at] }
       end
