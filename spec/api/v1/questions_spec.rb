@@ -266,7 +266,7 @@ describe 'Questions API', type: :request do
         end
       end
 
-      context 'with valid attributes' do
+      context 'with invalid attributes' do
         let(:params) do
           {
             "title": "",
@@ -285,6 +285,34 @@ describe 'Questions API', type: :request do
             post api_path, params: { access_token: access_token.token, question: params }, headers: headers
           end.to_not change(Question, :count)
         end
+      end
+    end
+  end
+
+  describe 'DELETE /api/v1/question/:id' do
+    let(:user) { create :user }
+    let(:access_token) { create :access_token, resource_owner_id: user.id }
+    let!(:resource) { create :question, author: user }
+    let(:api_path) { "/api/v1/questions/#{resource.id}" }
+
+    it_behaves_like 'API Authorizable' do
+      let(:method) { :delete }
+    end
+
+    context 'authorized' do
+      it 'deletes question from db' do
+        expect do
+          delete api_path, params: { access_token: access_token.token }, headers: headers
+        end.to change(Question, :count).by(-1)
+      end
+    end
+
+    context 'unauthorized' do
+      let(:access_token) { create :access_token }
+
+      it 'returns 401' do
+        delete api_path, params: { access_token: access_token.token }, headers: headers
+        expect(response.code.to_i).to eq 401
       end
     end
   end

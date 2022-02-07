@@ -2,7 +2,6 @@ module Api
   module V1
     class AnswersController < Api::V1::BaseController
       before_action :find_answer, only: %i[show update destroy]
-      before_action :find_question, only: %i[create]
       before_action :current_user, only: %i[create update destroy]
 
       def show
@@ -11,7 +10,7 @@ module Api
 
       def create
         authorize Answer
-        @answer = @question.answers.build(answer_params)
+        @answer = Answer.new(answer_params)
         @answer.author = current_user
 
         if @answer.save
@@ -43,10 +42,6 @@ module Api
 
       def find_answer
         @answer = Answer.find(params[:id])
-      end
-
-      def find_question
-        @question = Question.find(params[:question_id])
       end
 
       def current_user
