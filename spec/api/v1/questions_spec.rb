@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Questions API', type: :request do
@@ -60,9 +62,12 @@ describe 'Questions API', type: :request do
   describe 'GET /api/v1/questions/:id' do
     let(:user) { create :user }
     let(:access_token) { create :access_token }
-    let!(:files) { [
-      fixture_file_upload("#{Rails.root}/spec/rails_helper.rb", 'text/plain'),
-      fixture_file_upload("#{Rails.root}/spec/spec_helper.rb", 'text/plain')] }
+    let!(:files) do
+      [
+        fixture_file_upload("#{Rails.root}/spec/rails_helper.rb", 'text/plain'),
+        fixture_file_upload("#{Rails.root}/spec/spec_helper.rb", 'text/plain')
+      ]
+    end
     let!(:resource) { create :question, files: files, author: user }
     let!(:comments) { create_list(:comment, 3, commentable: resource, author: user) }
     let!(:links) { create_list(:link, 3, linkable: resource) }
@@ -147,12 +152,12 @@ describe 'Questions API', type: :request do
       context 'with valid attributes' do
         let(:params) do
           {
-            "title": "Edited title",
-            "body": "Edited body",
+            "title": 'Edited title',
+            "body": 'Edited body',
             "links_attributes": [
               {
-                "title": "ya",
-                "url": "https://yandex.ru"
+                "title": 'ya',
+                "url": 'https://yandex.ru'
               }
             ]
           }
@@ -174,23 +179,23 @@ describe 'Questions API', type: :request do
         it 'changes question attributes' do
           resource.reload
 
-          expect(resource.title).to eq "Edited title"
-          expect(resource.body).to eq "Edited body"
+          expect(resource.title).to eq 'Edited title'
+          expect(resource.body).to eq 'Edited body'
           expect(resource.links.size).to eq 3
-          expect(resource.links.last.title).to eq "ya"
-          expect(resource.links.last.url).to eq "https://yandex.ru"
+          expect(resource.links.last.title).to eq 'ya'
+          expect(resource.links.last.url).to eq 'https://yandex.ru'
         end
       end
 
       context 'with valid attributes' do
         let(:params) do
           {
-            "title": "",
-            "body": "",
+            "title": '',
+            "body": '',
             "links_attributes": [
               {
-                "title": "ya",
-                "url": "https://yandex.ru"
+                "title": 'ya',
+                "url": 'https://yandex.ru'
               }
             ]
           }
@@ -210,12 +215,12 @@ describe 'Questions API', type: :request do
       let(:access_token) { create :access_token }
       let(:params) do
         {
-          "title": "Edited title",
-          "body": "Edited body",
+          "title": 'Edited title',
+          "body": 'Edited body',
           "links_attributes": [
             {
-              "title": "ya",
-              "url": "https://yandex.ru"
+              "title": 'ya',
+              "url": 'https://yandex.ru'
             }
           ]
         }
@@ -232,7 +237,7 @@ describe 'Questions API', type: :request do
     let(:user) { create :user }
     let(:access_token) { create :access_token, resource_owner_id: user.id }
     let!(:resource) { create :question, author: user }
-    let(:api_path) { "/api/v1/questions" }
+    let(:api_path) { '/api/v1/questions' }
 
     it_behaves_like 'API Authorizable' do
       let(:method) { :post }
@@ -242,12 +247,12 @@ describe 'Questions API', type: :request do
       context 'with valid attributes' do
         let(:params) do
           {
-            "title": "Test title",
-            "body": "Test body",
+            "title": 'Test title',
+            "body": 'Test body',
             "links_attributes": [
               {
-                "title": "ya",
-                "url": "https://yandex.ru"
+                "title": 'ya',
+                "url": 'https://yandex.ru'
               }
             ]
           }
@@ -269,12 +274,12 @@ describe 'Questions API', type: :request do
       context 'with invalid attributes' do
         let(:params) do
           {
-            "title": "",
-            "body": "",
+            "title": '',
+            "body": '',
             "links_attributes": [
               {
-                "title": "ya",
-                "url": "https://yandex.ru"
+                "title": 'ya',
+                "url": 'https://yandex.ru'
               }
             ]
           }

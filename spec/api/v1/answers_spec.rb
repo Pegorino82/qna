@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Answers API', type: :request do
@@ -7,9 +9,12 @@ describe 'Answers API', type: :request do
     let(:user) { create :user }
     let(:access_token) { create :access_token }
     let!(:question) { create :question, author: user }
-    let!(:files) { [
-      fixture_file_upload("#{Rails.root}/spec/rails_helper.rb", 'text/plain'),
-      fixture_file_upload("#{Rails.root}/spec/spec_helper.rb", 'text/plain')] }
+    let!(:files) do
+      [
+        fixture_file_upload("#{Rails.root}/spec/rails_helper.rb", 'text/plain'),
+        fixture_file_upload("#{Rails.root}/spec/spec_helper.rb", 'text/plain')
+      ]
+    end
     let!(:resource) { create :answer, question: question, files: files, author: user }
     let!(:comments) { create_list(:comment, 3, commentable: resource, author: user) }
     let!(:links) { create_list(:link, 3, linkable: resource) }
@@ -57,11 +62,11 @@ describe 'Answers API', type: :request do
       context 'with valid attributes' do
         let(:params) do
           {
-            "body": "Edited body",
+            "body": 'Edited body',
             "links_attributes": [
               {
-                "title": "ya",
-                "url": "https://yandex.ru"
+                "title": 'ya',
+                "url": 'https://yandex.ru'
               }
             ]
           }
@@ -83,21 +88,21 @@ describe 'Answers API', type: :request do
         it 'changes answer attributes' do
           resource.reload
 
-          expect(resource.body).to eq "Edited body"
+          expect(resource.body).to eq 'Edited body'
           expect(resource.links.size).to eq 3
-          expect(resource.links.last.title).to eq "ya"
-          expect(resource.links.last.url).to eq "https://yandex.ru"
+          expect(resource.links.last.title).to eq 'ya'
+          expect(resource.links.last.url).to eq 'https://yandex.ru'
         end
       end
 
       context 'with valid attributes' do
         let(:params) do
           {
-            "body": "",
+            "body": '',
             "links_attributes": [
               {
-                "title": "ya",
-                "url": "https://yandex.ru"
+                "title": 'ya',
+                "url": 'https://yandex.ru'
               }
             ]
           }
@@ -116,11 +121,11 @@ describe 'Answers API', type: :request do
       let(:access_token) { create :access_token }
       let(:params) do
         {
-          "body": "Edited body",
+          "body": 'Edited body',
           "links_attributes": [
             {
-              "title": "ya",
-              "url": "https://yandex.ru"
+              "title": 'ya',
+              "url": 'https://yandex.ru'
             }
           ]
         }
@@ -138,7 +143,7 @@ describe 'Answers API', type: :request do
     let(:access_token) { create :access_token, resource_owner_id: user.id }
     let!(:question) { create :question, author: user }
     let!(:resource) { create :answer, question: question, author: user }
-    let(:api_path) { "/api/v1/answers" }
+    let(:api_path) { '/api/v1/answers' }
 
     it_behaves_like 'API Authorizable' do
       let(:method) { :post }
@@ -149,11 +154,11 @@ describe 'Answers API', type: :request do
         let(:params) do
           {
             "question_id": question.id,
-            "body": "Test body",
+            "body": 'Test body',
             "links_attributes": [
               {
-                "title": "ya",
-                "url": "https://yandex.ru"
+                "title": 'ya',
+                "url": 'https://yandex.ru'
               }
             ]
           }
@@ -176,11 +181,11 @@ describe 'Answers API', type: :request do
         let(:params) do
           {
             "question_id": 0,
-            "body": "",
+            "body": '',
             "links_attributes": [
               {
-                "title": "ya",
-                "url": "https://yandex.ru"
+                "title": 'ya',
+                "url": 'https://yandex.ru'
               }
             ]
           }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Profiles API', type: :request do
@@ -40,7 +42,7 @@ describe 'Profiles API', type: :request do
     end
 
     context 'authorized' do
-      let(:all) { create_list :user, 3}
+      let(:all) { create_list :user, 3 }
       let(:me) { all.first }
       let(:user) { all.last }
       let(:access_token) { create :access_token, resource_owner_id: me.id }
