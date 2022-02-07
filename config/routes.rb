@@ -3,6 +3,21 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
   root to: "questions#index"
 
+  namespace :api do
+    namespace :v1 do
+      resources :profiles, only: [] do
+        get :me, on: :collection
+        get :all, on: :collection
+      end
+
+      resources :questions, only: %i[index show create update destroy] do
+        get :answers, on: :member
+      end
+
+      resources :answers, only: %i[show create update destroy]
+    end
+  end
+
   concern :votable do
     member do
       post :like
