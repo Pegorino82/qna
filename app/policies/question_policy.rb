@@ -24,12 +24,4 @@ class QuestionPolicy < ApplicationPolicy
   def destroy?
     user.admin? || user&.author_of?(record)
   end
-
-  def api_update?
-    user&.author_of?(record)
-  end
-
-  def api_destroy?
-    user&.author_of?(record)
-  end
 end

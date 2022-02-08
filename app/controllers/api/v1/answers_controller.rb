@@ -4,7 +4,6 @@ module Api
   module V1
     class AnswersController < Api::V1::BaseController
       before_action :find_answer, only: %i[show update destroy]
-      before_action :current_user, only: %i[create update destroy]
 
       def show
         render json: @answer, serializer: AnswerSerializer
@@ -23,7 +22,7 @@ module Api
       end
 
       def update
-        authorize @answer, :api_update?, policy_class: AnswerPolicy
+        authorize @answer, :update?, policy_class: AnswerPolicy
         if @answer.update(answer_params)
           render json: @answer, serializer: AnswerSerializer
         else
@@ -32,7 +31,7 @@ module Api
       end
 
       def destroy
-        authorize @answer, :api_destroy?, policy_class: AnswerPolicy
+        authorize @answer, :destroy?, policy_class: AnswerPolicy
         if @answer.destroy
           render json: { status: :ok }
         else
@@ -44,10 +43,6 @@ module Api
 
       def find_answer
         @answer = Answer.find(params[:id])
-      end
-
-      def current_user
-        @current_user = current_resource_owner
       end
 
       def answer_params

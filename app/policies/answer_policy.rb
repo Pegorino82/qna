@@ -20,12 +20,4 @@ class AnswerPolicy < ApplicationPolicy
   def best_answer?
     user.admin? || user&.author_of?(record&.question)
   end
-
-  def api_update?
-    user&.author_of?(record)
-  end
-
-  def api_destroy?
-    user&.author_of?(record)
-  end
 end
