@@ -18,7 +18,15 @@ class Question < ApplicationRecord
 
   scope :new_on_top, -> { order(created_at: :desc) }
 
+  after_create :calculate_reputation
+
   def answers_without_best
     answers.where.not(id: best_answer_id)
+  end
+
+  private
+
+  def calculate_reputation
+    ReputationJob.perform_later(self )
   end
 end
