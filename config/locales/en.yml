@@ -2,6 +2,10 @@ en:
   pundit:
     not_authorized: "You are not authorized to perform this action."
 
+  mailers:
+    daily_digest:
+      title: 'Questions created last day:'
+
   main_nav:
     sign_in: 'Sign in'
     sign_out: 'Sign out'
