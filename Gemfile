@@ -66,6 +66,8 @@ gem 'active_model_serializers', '~> 0.10'
 gem 'oj'
 
 gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'whenever', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
