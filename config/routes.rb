@@ -37,12 +37,14 @@ Rails.application.routes.draw do
         patch :best_answer
       end
     end
+    resources :followings, only: %i[create]
   end
 
   resources :files, only: :destroy
   resources :links, only: :destroy
   resources :awards, only: :index
   resources :comments, only: %i[create destroy]
+  resources :followings, only: %i[destroy]
 
   resources :authorizations, only: %i[new create] do
     get 'email_confirmation/:confirmation_token', action: :email_confirmation, as: :email_confirmation

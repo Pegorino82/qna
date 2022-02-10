@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
 
   def show
     authorize @question
+    @following = Following.find_by(author: current_user, question: @question)
     @answer = @question.answers.build
     @answer.links.build
   end
@@ -33,6 +34,7 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.build(question_params)
 
     if @question.save
+      @question.followings.create(author: current_user)
       redirect_to @question, notice: t('.success')
     else
       render :new
@@ -74,6 +76,7 @@ class QuestionsController < ApplicationController
 
   def publish_question
     return if @question.errors.any?
+
     ActionCable.server.broadcast(
       'questions',
       ApplicationController.render(

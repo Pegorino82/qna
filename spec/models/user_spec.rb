@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
   it { should have_many(:comments).class_name('Comment') }
   it { should have_many(:awards) }
   it { should have_many(:authorizations).dependent(:destroy) }
+  it { should have_many(:followings).class_name('Following').dependent(:destroy) }
 
   it { should validate_presence_of(:email) }
   it { should validate_presence_of(:password) }

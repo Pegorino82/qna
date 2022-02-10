@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_06_064837) do
+ActiveRecord::Schema.define(version: 2022_02_10_174239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,15 @@ ActiveRecord::Schema.define(version: 2022_02_06_064837) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+  end
+
+  create_table "followings", force: :cascade do |t|
+    t.bigint "question_id"
+    t.bigint "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_followings_on_author_id"
+    t.index ["question_id"], name: "index_followings_on_question_id"
   end
 
   create_table "links", force: :cascade do |t|
@@ -181,6 +190,8 @@ ActiveRecord::Schema.define(version: 2022_02_06_064837) do
   add_foreign_key "awards", "answers"
   add_foreign_key "awards", "questions"
   add_foreign_key "comments", "users", column: "author_id"
+  add_foreign_key "followings", "questions"
+  add_foreign_key "followings", "users", column: "author_id"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "questions", "answers", column: "best_answer_id"

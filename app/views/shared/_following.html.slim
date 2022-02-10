@@ -1,0 +1,13 @@
+- if current_user
+  - if @following&.persisted?
+    p= link_to t('questions.show.unfollow'),
+            following_path(@following),
+            method: :delete,
+            remote: true ,
+            class: 'unfollow-link mx-1'
+  - else
+    p= link_to t('questions.show.follow'),
+            question_followings_path(@question),
+            method: :post,
+            remote: true,
+            class: 'follow-link mx-1'

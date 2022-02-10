@@ -21,4 +21,10 @@ class Answer < ApplicationRecord
     question.update(best_answer: self)
     question.award&.update(answer: self)
   end
+
+  private
+
+  def follow_notification
+    NotificationJob.perform_later(self)
+  end
 end

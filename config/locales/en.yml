@@ -34,6 +34,8 @@ en:
       answers: 'Answers'
       your_answer: 'Your answer'
       confirm_delete: 'Delete?'
+      follow: 'Follow'
+      unfollow: 'Unfollow'
     new:
       ask: 'Ask'
     create:
