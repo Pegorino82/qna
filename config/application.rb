@@ -22,6 +22,8 @@ module Qna
     #
     config.active_storage.replace_on_assign_to_many = false
 
+    config.active_job.queue_adapter = :sidekiq
+
     config.autoload_paths += [config.root.join('app')]
 
     config.generators do |g|
