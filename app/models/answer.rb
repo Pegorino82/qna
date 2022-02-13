@@ -25,6 +25,6 @@ class Answer < ApplicationRecord
   private
 
   def follow_notification
-    NotificationJob.perform_later(self)
+    NotificationJob.perform_later(self.question)
   end
 end
