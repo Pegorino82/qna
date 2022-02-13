@@ -20,6 +20,7 @@ class Question < ApplicationRecord
   scope :new_on_top, -> { order(created_at: :desc) }
 
   after_create :calculate_reputation
+  after_create :follow
 
   def answers_without_best
     answers.where.not(id: best_answer_id)
@@ -29,5 +30,9 @@ class Question < ApplicationRecord
 
   def calculate_reputation
     ReputationJob.perform_later(self)
+  end
+
+  def follow
+    self.followings.create(author_id: self.author_id)
   end
 end
