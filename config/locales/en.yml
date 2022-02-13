@@ -83,3 +83,23 @@ en:
       create: 'Add comment'
     destroy:
       delete: 'Delete'
+  search:
+    header: 'Search results'
+    not_found: 'No matches found'
+    answered_by: 'Answered by: %{email}'
+    form:
+      search_string: 'Search:'
+    answer:
+      title: 'Answer in question: '
+      body: "Answer's body: %{answer}"
+    question:
+      title: 'Question: '
+      body: "Question's body: %{question}"
+    comments:
+      title:
+        question: 'Comment in question:'
+        answer: 'Comment for answer in question:'
+      body: "Comment's body: %{comment}"
+    user:
+      title: 'User: %{email}'
+

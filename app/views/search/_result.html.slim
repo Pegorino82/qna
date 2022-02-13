@@ -1,0 +1,7 @@
+h3= t('search.header')
+- if @results&.empty?
+  p= t('search.not_found')
+-else
+  - @results&.each do |result|
+    = render "#{result.class.name.downcase.pluralize}/search_result", result: result
+  = render 'search/pagination'

@@ -1,0 +1,23 @@
+nav aria-label="Search navigation"
+  - if !@results.nil?
+    ul class="pagination"
+      li class="page-item"
+        - if @results.current_page > 1 && @results.total_pages > 1
+          =link_to "&laquo;".html_safe, search_path(**@search_params, page: @results.current_page - 1), remote: true , class: "page-link"
+        - else
+          =link_to "&laquo;".html_safe, "#", remote: true , class: "page-link disabled"
+
+      - (1..@results.total_pages).each do |page|
+        li class="page-item#{@results.current_page == page ? ' active' : ''}"
+          =link_to page, search_path(**request.params, page: page),
+                  remote: true ,
+                  class: "page-link"
+
+      li class="page-item"
+        - if @results.current_page < @results.total_pages && @results.total_pages > 1
+          = link_to "&raquo;".html_safe, search_path(**request.params, page: @results.current_page + 1), remote: true, class: "page-link"
+        - else
+          =link_to "&raquo;".html_safe, "#", remote: true , class: "page-link disabled"
+
+
+

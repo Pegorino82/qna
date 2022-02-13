@@ -1,0 +1,5 @@
+.search-item.border.mb-3
+  span= t('search.answer.title')
+  span= link_to result.question.title, question_path(result.question)
+  p= t('search.answer.body', answer: result.body.truncate(10))
+  p= t('search.answered_by', email: result.author.email)

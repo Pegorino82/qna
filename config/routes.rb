@@ -46,6 +46,8 @@ Rails.application.routes.draw do
   resources :comments, only: %i[create destroy]
   resources :followings, only: %i[destroy]
 
+  get 'search', to: 'search#search'
+
   resources :authorizations, only: %i[new create] do
     get 'email_confirmation/:confirmation_token', action: :email_confirmation, as: :email_confirmation
   end

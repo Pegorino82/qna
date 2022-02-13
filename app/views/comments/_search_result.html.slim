@@ -1,0 +1,9 @@
+.search-item.border.mb-3
+  - if result.commentable_type == 'Question'
+    span= t('search.comments.title.question')
+    span= link_to result.commentable.title, question_path(result.commentable)
+  - elsif result.commentable_type == 'Answer'
+    span= t('search.comments.title.answer')
+    span= link_to result.commentable.question.title, question_path(result.commentable.question)
+  p= span= t('search.comments.body', comment: result.body.truncate(10))
+  p= t('search.answered_by', email: result.author.email)
