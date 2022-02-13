@@ -44,3 +44,6 @@ yarn-debug.log*
 
 aws_s3_credentials.csv
 config/credentials.yml.enc
+
+config/*.sphinx.conf
+db/sphinx
