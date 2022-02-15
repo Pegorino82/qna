@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe FilePolicy, type: :policy do
@@ -6,7 +8,6 @@ RSpec.describe FilePolicy, type: :policy do
   let(:question) { create :question, author: user, files: [file] }
   let(:other_user) { create :user }
   let(:other_question) { create :question, author: other_user, files: [file] }
-
 
   subject { described_class }
 

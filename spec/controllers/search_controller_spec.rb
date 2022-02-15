@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe SearchController, type: :controller do
-
   let(:user) { create :user }
   let(:question) { create :question, author: user }
 

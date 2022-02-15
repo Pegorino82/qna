@@ -37,7 +37,7 @@ feature 'User can comment answer', "
   describe 'Unauthenticated user', js: true do
     scenario "couldn't leave a comment to question" do
       visit question_path(question)
-      within ".answers" do
+      within '.answers' do
         expect(page).to_not have_content I18n.t('comments.new.create')
       end
     end

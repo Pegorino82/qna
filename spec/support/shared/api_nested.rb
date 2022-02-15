@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples_for 'API nestable' do
   describe 'author' do
     it 'contains author object' do
@@ -17,9 +19,11 @@ shared_examples_for 'API nestable' do
     end
 
     it 'returns all public fields' do
-      comments_public_fields.each do |attr|
-        expect(resource_response['comments'].first[attr]).to eq resource.comments.first.send(attr).as_json
-      end unless skipped_params&.include? 'comments'
+      unless skipped_params&.include? 'comments'
+        comments_public_fields.each do |attr|
+          expect(resource_response['comments'].first[attr]).to eq resource.comments.first.send(attr).as_json
+        end
+      end
     end
   end
 

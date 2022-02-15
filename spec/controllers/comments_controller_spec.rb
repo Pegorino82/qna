@@ -12,7 +12,7 @@ RSpec.describe CommentsController, type: :controller do
       before { login(user) }
 
       context 'with valid attributes' do
-        it "saves a new comment to database" do
+        it 'saves a new comment to database' do
           expect do
             puts attributes_for(:comment, commentable: commentable, author: user)
             post :create,

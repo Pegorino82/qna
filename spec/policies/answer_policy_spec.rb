@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe AnswerPolicy, type: :policy do
@@ -33,7 +35,7 @@ RSpec.describe AnswerPolicy, type: :policy do
     let(:answer) { create :answer, question: question, author: user }
     let(:question_other_answer) { create :answer, question: question, author: other_user }
 
-    it "grants access if user is admin" do
+    it 'grants access if user is admin' do
       expect(subject).to permit(admin, answer)
     end
 

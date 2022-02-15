@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SearchController < ApplicationController
-  AVAILABLE_MODELS = %w[question answer comment user]
+  AVAILABLE_MODELS = %w[question answer comment user].freeze
   START_PAGE = 1
 
   before_action :search_params
