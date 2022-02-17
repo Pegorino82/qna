@@ -92,7 +92,17 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  #
+
+  # deploy
+    gem 'capistrano', require: false
+    gem 'capistrano-bundler', require: false
+    gem 'capistrano-rails', require: false
+    gem 'capistrano-rvm', require: false
+    gem 'capistrano-passenger', require: false
+    gem 'capistrano-sidekiq', require: false
+
+    gem 'ed25519', '~> 1.2', require: false
+    gem 'bcrypt_pbkdf', '~> 1.0', require: false
 end
 
 group :test do
