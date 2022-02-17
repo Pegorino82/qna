@@ -47,3 +47,5 @@ config/credentials.yml.enc
 
 config/*.sphinx.conf
 db/sphinx
+
+secret.txt
