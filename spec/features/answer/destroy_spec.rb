@@ -18,7 +18,9 @@ feature 'Authenticated user can delete his answer', "
 
       visit question_path(question)
 
-      click_on I18n.t('questions.show.delete_answer')
+      within ".answers" do
+        click_on I18n.t('questions.show.delete_answer')
+      end
 
       expect(page).to have_content I18n.t('answers.destroy.success')
       expect(page).to have_content I18n.t('questions.show.answers')
