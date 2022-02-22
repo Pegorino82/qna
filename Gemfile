@@ -72,6 +72,8 @@ gem 'whenever', require: false
 gem 'mysql2'
 gem 'thinking-sphinx'
 
+gem 'unicorn'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -100,6 +102,7 @@ group :development do
     gem 'capistrano-rvm', require: false
     gem 'capistrano-passenger', require: false
     gem 'capistrano-sidekiq', require: false
+    gem 'capistrano3-unicorn', require: false
 
     gem 'ed25519', '~> 1.2', require: false
     gem 'bcrypt_pbkdf', '~> 1.0', require: false

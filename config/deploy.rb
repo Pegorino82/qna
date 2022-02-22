@@ -15,3 +15,5 @@ append :linked_files, "config/database.yml", 'config/master.key'
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", 'storage'
 
 set :pty, false
+
+after 'deploy:publishing', 'unicorn:restart'
