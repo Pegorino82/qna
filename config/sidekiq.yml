@@ -2,6 +2,3 @@
   - default
   - mailers
 
-production:
-  pidfile: /home/deployer/qna/shared/tmp/pids/sidekiq-0.pid
-  logfile: /home/deployer/qna/shared/log/sidekiq.log

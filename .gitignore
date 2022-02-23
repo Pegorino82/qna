@@ -49,3 +49,6 @@ config/*.sphinx.conf
 db/sphinx
 
 secret.txt
+qna.monit.rc
+
+.DS_Store
