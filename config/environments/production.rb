@@ -63,7 +63,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "qna_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'https://testguru33.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'http://167.71.66.194' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: ENV['SMTP_ADDRESS'],
