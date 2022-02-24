@@ -4,5 +4,6 @@
       h3= t('.header')
       p= link_to t('.ask'), new_question_path
 
-  .question-items
-    =render @questions
+  - cache collection_cache_key_for :question do
+    .question-items
+      =render @questions

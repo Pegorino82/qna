@@ -1,45 +1,46 @@
-div class="question row" id="question-#{@question.id}"
+- cache @question do
+  div class="question row" id="question-#{@question.id}"
 
-  div class='col-md-2 border-end'
-    = render 'votes/vote', resource: @question
+    div class='col-md-2 border-end'
+      = render 'votes/vote', resource: @question
 
-  div class='col-md-10'
-    div class='question-title'
-      h3#question_title= @question.title
+    div class='col-md-10'
+      div class='question-title'
+        h3#question_title= @question.title
 
 
-    div class='d-flex'
-      - if current_user&.author_of?(@question)
-        p= link_to t('.delete'), question_path(@question), method: :delete, confirm: t('.confirm_delete'), class: 'mx-1'
-        p= link_to t('.edit'), '#', data: { question_id: @question.id }, class: 'edit-question-link mx-1'
-      .follow
-        =render 'shared/following'
+      div class='d-flex'
+        - if current_user&.author_of?(@question)
+          p= link_to t('.delete'), question_path(@question), method: :delete, confirm: t('.confirm_delete'), class: 'mx-1'
+          p= link_to t('.edit'), '#', data: { question_id: @question.id }, class: 'edit-question-link mx-1'
+        .follow
+          =render 'shared/following'
 
-    div class='question-body m-1'
-      p#question_body= @question.body
+      div class='question-body m-1'
+        p#question_body= @question.body
 
-    #question_files
-      =render 'shared/files', resource: @question
+      #question_files
+        =render 'shared/files', resource: @question
 
-    #question_links
-      =render 'shared/links', resource: @question
+      #question_links
+        =render 'shared/links', resource: @question
 
-    hr
-    #question_comments class="ml-2"
-      =render 'shared/comments', resource: @question
+      hr
+      #question_comments class="ml-2"
+        =render 'shared/comments', resource: @question
 
-    .question_errors
-      = render 'shared/errors', resource: @question
+      .question_errors
+        = render 'shared/errors', resource: @question
 
-    = render 'form', form_local: false, form_class: 'hidden', submit_text: t('questions.edit.submit')
+      = render 'form', form_local: false, form_class: 'hidden', submit_text: t('questions.edit.submit')
 
-hr
+  hr
 
-h4= t('.answers')
+  h4= t('.answers')
 
-ul class='answers list-group list-unstyled'
-  =render @question.best_answer, answer_class: 'best_answer' unless @question.best_answer_id.nil?
-  =render @question.answers_without_best, answer_class: nil
+  ul class='answers list-group list-unstyled'
+    =render @question.best_answer, answer_class: 'best_answer' unless @question.best_answer_id.nil?
+    =render @question.answers_without_best, answer_class: nil
 
 - if user_signed_in?
   h4= t('.your_answer')
